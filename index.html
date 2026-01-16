@@ -3,75 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>GrabGo Shillong</title>
+    <title>GrabGo - Instant Local Pickup & Delivery | Shillong</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f9f9f9; }
-        .yellow-btn { background-color: #f2ca52; color: black; font-weight: 900; }
-        .card-shadow { border: 1px solid #eee; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        body { font-family: 'Inter', sans-serif; background-color: #fcfcfc; -webkit-tap-highlight-color: transparent; }
+        .grab-yellow { background-color: #f2ca52; }
+        .animate-fade { animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
+    <script type="importmap">
+    {
+      "imports": {
+        "react": "https://esm.sh/react@19.0.0",
+        "react-dom/client": "https://esm.sh/react-dom@19.0.0/client",
+        "lucide-react": "https://esm.sh/lucide-react@0.460.0"
+      }
+    }
+    </script>
 </head>
 <body>
     <div id="root"></div>
 
-    <script type="text/babel">
-        const { useState } = React;
-        
-        // Simple Lucide-like Icons using SVG for stability
-        const Icon = ({ name }) => {
-            const icons = {
-                pill: <path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/>,
-                home: <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>,
-                file: <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14.5 2 14.5 7.5 20 7.5"/>,
-                box: <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>
-            };
-            return (
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    {icons[name]}
-                </svg>
-            );
-        };
+    <script type="text/babel" data-type="module">
+        import React, { useState, useEffect } from 'react';
+        import ReactDOM from 'react-dom/client';
+        import * as Lucide from 'lucide-react';
+
+        const { Package, Clock, MapPin, Pill, Home, FileText, Settings, LogOut, LayoutDashboard, History, ShieldCheck, ChevronRight, Send, CreditCard, ArrowLeft, CheckCircle } = Lucide;
+
+        const ADMIN_EMAIL = "admin@grabgo.in";
+
+        // --- UPDATED CATEGORIES ---
+        const SERVICE_CATEGORIES = [
+          { id: 'medicines', name: 'Medicines', icon: <Pill size={32} />, bgColor: 'bg-rose-50', border: 'hover:border-rose-200' },
+          { id: 'household', name: 'Household Items', icon: <Home size={32} />, bgColor: 'bg-emerald-50', border: 'hover:border-emerald-200' },
+          { id: 'documents', name: 'Documents & Files', icon: <FileText size={32} />, bgColor: 'bg-blue-50', border: 'hover:border-blue-200' },
+          { id: 'others', name: 'Others (Custom)', icon: <Settings size={32} />, bgColor: 'bg-gray-100', border: 'hover:border-gray-300' }
+        ];
 
         const App = () => {
             const [user, setUser] = useState(null);
-            const [view, setView] = useState('home'); // home, dashboard, form
-            const [selectedType, setSelectedType] = useState('');
-            const [agreed, setAgreed] = useState(false);
+            const [currentView, setCurrentView] = useState('home');
+            const [selectedService, setSelectedService] = useState(null);
+            const [orders, setOrders] = useState([]);
 
-            const login = () => {
-                const email = prompt("Enter Email:", "biswajit.mgla@gmail.com");
-                if (email) {
-                    const namePart = email.split(/[.@]/)[0];
-                    setUser({ name: namePart.charAt(0).toUpperCase() + namePart.slice(1) });
-                    setView('dashboard');
-                }
+            // VIEWS
+            const HomeView = () => {
+                const [agreed, setAgreed] = useState(false);
+                
+                const handleLogin = () => {
+                    if (!agreed) {
+                        alert("Please agree to the Terms & Disclaimer to proceed.");
+                        return;
+                    }
+                    const email = prompt("Enter your Gmail:", "biswajit.mgla@gmail.com");
+                    if (email) {
+                        const name = email.split(/[.@]/)[0];
+                        const formattedName = name.charAt(0).toUpperCase() + name.slice(1);
+                        setUser({ name: formattedName, email, isAdmin: email === ADMIN_EMAIL });
+                        setCurrentView('dashboard');
+                    }
+                };
+
+                return (
+                    <div className="flex flex-col items-center justify-center min-h-[85vh] text-center px-6 animate-fade">
+                        <div className="bg-[#f2ca52] p-5 rounded-3xl shadow-xl mb-6"><Package size={48} /></div>
+                        <h1 className="text-5xl font-black tracking-tighter mb-2">GrabGo</h1>
+                        <p className="text-gray-500 font-bold uppercase tracking-widest text-sm mb-12">Shillong Instant Delivery</p>
+                        
+                        <div className="w-full max-w-sm bg-white p-6 rounded-3xl border border-gray-100 shadow-sm mb-8">
+                            <label className="flex items-start gap-3 cursor-pointer text-left">
+                                <input type="checkbox" checked={agreed} onChange={(e) => setAgreed(e.target.checked)} className="mt-1 w-5 h-5 accent-black" />
+                                <span className="text-xs text-gray-500 leading-relaxed font-medium">
+                                    I agree to the <span className="font-bold text-black underline">GrabGo Disclaimer</span>: We do not deliver illegal items, alcohol, or restricted substances. All deliveries are tracked and subject to local Shillong laws.
+                                </span>
+                            </label>
+                        </div>
+
+                        <button onClick={handleLogin} className={`w-full max-w-xs py-4 rounded-2xl font-black transition-all flex items-center justify-center gap-3 shadow-lg ${agreed ? 'bg-[#f2ca52] text-black hover:bg-black hover:text-[#f2ca52]' : 'bg-gray-200 text-gray-400 cursor-not-allowed'}`}>
+                            <img src="https://www.google.com/favicon.ico" className="w-5 h-5" /> Sign in with Google
+                        </button>
+                    </div>
+                );
             };
 
-            if (!user) return (
-                <div className="flex flex-col items-center justify-center min-h-screen p-6 text-center">
-                    <div className="bg-[#f2ca52] p-6 rounded-[2rem] mb-6 shadow-xl"><Icon name="box"/></div>
-                    <h1 className="text-6xl font-black tracking-tighter mb-2 italic">GrabGo</h1>
-                    <p className="text-gray-400 font-bold uppercase tracking-widest text-[10px] mb-12 text-center">Shillong Quick Fetch & Drop</p>
-                    <button onClick={login} className="yellow-btn px-10 py-5 rounded-2xl shadow-lg flex items-center gap-3 active:scale-95 transition-all">
-                        <img src="https://www.google.com/favicon.ico" className="w-4 h-4" /> SIGN IN WITH GOOGLE
-                    </button>
+            const DashboardView = () => (
+                <div className="space-y-8 animate-fade px-4">
+                    <div className="flex justify-between items-center">
+                        <div>
+                            <h2 className="text-3xl font-black">Kumno, {user.name}!</h2>
+                            <p className="text-gray-500 font-medium">Shillong delivery at your fingertips.</p>
+                        </div>
+                        <div className="bg-[#f2ca52] p-3 rounded-2xl shadow-md"><MapPin size={24} /></div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {SERVICE_CATEGORIES.map(s => (
+                            <button key={s.id} onClick={() => { setSelectedService(s.id); setCurrentView('order-form'); }} className={`${s.bgColor} p-8 rounded-[2rem] border-2 border-transparent ${s.border} transition-all text-left group`}>
+                                <div className="bg-white p-4 rounded-2xl w-max shadow-sm mb-4 group-hover:scale-110 transition-transform">{s.icon}</div>
+                                <h3 className="text-xl font-extrabold">{s.name}</h3>
+                                <div className="mt-4 flex items-center text-xs font-black uppercase tracking-widest opacity-60">Book Now <ChevronRight size={14} /></div>
+                            </button>
+                        ))}
+                    </div>
+
+                    <div className="bg-black text-white p-8 rounded-[2.5rem] relative overflow-hidden">
+                        <h3 className="text-2xl font-black mb-2 relative z-10">GrabGo Prime</h3>
+                        <p className="text-gray-400 text-sm relative z-10">Flat ₹80 delivery for members. Coming Soon.</p>
+                        <div className="absolute right-[-20px] bottom-[-20px] opacity-10 rotate-12"><Package size={150} /></div>
+                    </div>
                 </div>
             );
 
-            if (view === 'dashboard') return (
-                <div className="max-w-md mx-auto p-6 animate-fade">
-                    <div className="flex justify-between items-center mb-10">
-                        <h2 className="text-3xl font-black tracking-tight">Kumno, {user.name}!</h2>
-                        <button onClick={() => setUser(null)} className="text-red-500 font-bold text-xs uppercase">Logout</button>
+            // Simple Navbar
+            const Navbar = () => (
+                <nav className="bg-white border-b sticky top-0 z-50 px-4 h-20 flex items-center justify-between">
+                    <div className="flex items-center gap-2 font-black text-2xl tracking-tighter cursor-pointer" onClick={() => setCurrentView('dashboard')}>
+                        <div className="bg-[#f2ca52] p-1.5 rounded-lg"><Package size={20}/></div> GrabGo
                     </div>
+                    <div className="flex gap-4">
+                        <button onClick={() => setCurrentView('dashboard')} className={`p-3 rounded-xl ${currentView === 'dashboard' ? 'bg-[#f2ca52]' : 'text-gray-400'}`}><LayoutDashboard size={20}/></button>
+                        <button onClick={() => setCurrentView('history')} className={`p-3 rounded-xl ${currentView === 'history' ? 'bg-[#f2ca52]' : 'text-gray-400'}`}><History size={20}/></button>
+                        <button onClick={() => setUser(null)} className="p-3 rounded-xl text-red-500 hover:bg-red-50"><LogOut size={20}/></button>
+                    </div>
+                </nav>
+            );
 
-                    <div className="grid grid-cols-1 gap-4">
-                        {[
-                            { id: 'Med', name: 'Medicines', icon: 'pill', bg: 'bg-rose-50' },
-                            { id: 'House', name: 'Household Items', icon: 'home', bg: 'bg-emerald-50' },
-                            { id: 'Doc', name: 'Documents & Files', icon: 'file', bg: 'bg-blue-50' },
-                            { id: 'Other', name: 'Others (Custom)', icon: 'box', bg: 'bg-gray-100' }
-                        ].map(item => (
-                            <button key={item.id} onClick={() => { setSelectedType(item.name); setView('form
+            return (
+                <div className="min-h-screen bg-gray-50 flex flex-col">
+                    {user && <Navbar />}
+                    <main className="flex-grow max-w-4xl mx-auto w-full py-8">
+                        {!user ? <HomeView /> : (
+                            <>
+                                {currentView === 'dashboard' && <DashboardView />}
+                                {currentView === 'order-form' && (
+                                    <div className="p-4 animate-fade">
+                                        <button onClick={() => setCurrentView('dashboard')} className="flex items-center font-bold text-gray-400 mb-6"><ArrowLeft size={18}/> Back</button>
+                                        <div className="bg-white p-8 rounded-[2.5rem] shadow-sm border">
+                                            <h2 className="text-3xl font-black mb-6">Request Pickup</h2>
+                                            <p className="bg-blue-50 text-blue-600 p-4 rounded-2xl text-sm font-bold mb-8">You are booking: {SERVICE_CATEGORIES.find(s=>s.id===selectedService)?.name}</p>
+                                            <button onClick={() => { alert('Order placed!'); setCurrentView('dashboard'); }} className="w-full bg-[#f2ca52] py-5 rounded-2xl font-black text-lg shadow-xl">Confirm Delivery</button>
+                                        </div>
+                                    </div>
+                                )}
+                                {currentView === 'history' && <div className="p-4 text-center py-20"><History size={48} className="mx-auto text-gray-200 mb-4"/><p className="font-bold text-gray-400">No recent orders in Shillong.</p></div>}
+                            </>
+                        )}
+                    </main>
+                    <footer className="py-8 text-center text-gray-400 text-xs font-bold uppercase tracking-widest">
+                        &copy; 2026 GrabGo Shillong
+                    </footer>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
