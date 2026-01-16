@@ -3,42 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>GrabGo Shillong | Premium</title>
+    <title>GrabGo Shillong | Premium Delivery</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f9fafb; overflow-x: hidden; }
+        body { font-family: 'Inter', sans-serif; background-color: #fcfcfc; color: #1a1a1a; }
         .yellow-gradient { background: linear-gradient(135deg, #f2ca52 0%, #e9b92e 100%); }
-        .animate-up { animation: fadeInUp 0.5s ease-out forwards; }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-up { animation: fadeInUp 0.4s ease-out forwards; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         .hidden { display: none !important; }
-        .glass { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
-        input:focus { border-color: #f2ca52 !important; background-color: white !important; }
+        .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        .service-card:active { transform: scale(0.97); }
+        input:focus, select:focus { border-color: #f2ca52 !important; outline: none; background: white !important; }
+        .option-selected { border-color: black !important; background-color: #f2ca52 !important; color: black !important; }
     </style>
 </head>
 <body>
 
     <div id="view-home" class="flex flex-col items-center justify-center min-h-screen p-6 text-center animate-up">
-        <div class="yellow-gradient w-32 h-32 rounded-[2.5rem] mb-10 shadow-2xl flex items-center justify-center text-5xl">📦</div>
+        <div class="yellow-gradient w-32 h-32 rounded-[2.5rem] mb-10 shadow-2xl flex items-center justify-center text-5xl shadow-yellow-200">📦</div>
         <h1 class="text-7xl font-black tracking-tighter mb-2 italic text-gray-900">GrabGo</h1>
         <div class="mb-14">
             <p class="text-xl font-black text-gray-800 uppercase tracking-tight">QUICK DOCUMENTS & DOMESTIC DELIVERY</p>
             <p class="text-[11px] font-bold text-red-500 uppercase mt-2 tracking-[0.25em]">WEIGHT BELOW 1KG ALWAYS</p>
         </div>
-        <button onclick="showDashboard()" class="yellow-gradient px-12 py-5 rounded-2xl shadow-xl flex items-center gap-4 active:scale-95 transition-all font-black text-black uppercase tracking-tight">
+        <button onclick="showDashboard()" class="yellow-gradient px-12 py-5 rounded-2xl shadow-xl flex items-center gap-4 active:scale-95 transition-all font-black text-black uppercase tracking-tight border-b-4 border-black/10">
             <img src="https://www.google.com/favicon.ico" class="w-5 h-5" /> Sign in with Google
         </button>
-        <p class="mt-16 text-[10px] text-gray-400 font-bold uppercase tracking-widest">Serving Shillong 24/7</p>
+        <p class="mt-16 text-[10px] text-gray-400 font-bold uppercase tracking-widest">Shillong's Most Trusted Fetch Service</p>
     </div>
 
-    <div id="view-dashboard" class="hidden min-h-screen pb-10">
+    <div id="view-dashboard" class="hidden min-h-screen pb-20">
         <nav class="glass sticky top-0 z-50 border-b border-gray-100 px-6 py-5">
             <div class="max-w-4xl mx-auto flex justify-between items-center">
                 <div class="flex items-center gap-2">
                     <div class="bg-[#f2ca52] px-2 py-1 rounded-lg font-black italic text-sm shadow-sm">GG</div>
                     <span class="text-2xl font-black tracking-tighter">GrabGo</span>
                 </div>
-                <button onclick="location.reload()" class="text-red-500 font-black text-[10px] uppercase tracking-widest">Logout</button>
+                <button onclick="location.reload()" class="text-red-500 font-black text-[10px] uppercase tracking-widest hover:bg-red-50 px-3 py-2 rounded-lg transition-all">Logout</button>
             </div>
         </nav>
 
@@ -47,55 +49,43 @@
                 <div>
                     <div class="flex items-center gap-1 mb-1">
                         <span class="text-[#f2ca52]">📍</span>
-                        <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Shillong City</p>
+                        <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Live: Shillong, Meghalaya</p>
                     </div>
                     <h2 class="text-4xl font-black text-gray-900 tracking-tight">Kumno, Friend!</h2>
-                    <p class="text-gray-500 font-medium mt-1">What can we grab for you today?</p>
+                    <p class="text-gray-500 font-medium mt-1">What can we fetch for you today?</p>
                 </div>
-                <div class="w-16 h-16 rounded-3xl bg-gray-100 border-4 border-white shadow-xl overflow-hidden">
+                <div class="w-16 h-16 rounded-[1.5rem] border-4 border-white shadow-2xl overflow-hidden bg-gray-100">
                     <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="User Avatar">
                 </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-                <button onclick="showOrder('Medicines', '☕', 'bg-blue-50')" class="bg-blue-50 p-8 rounded-[3rem] border-2 border-transparent hover:border-blue-200 transition-all hover:shadow-xl active:scale-95 text-left group">
+                <div onclick="showOrder('Medicines', '☕', 'bg-blue-50')" class="service-card bg-blue-50 p-8 rounded-[3rem] border-2 border-transparent hover:border-blue-200 transition-all hover:shadow-xl cursor-pointer group">
                     <div class="bg-white w-16 h-16 rounded-2xl flex items-center justify-center text-4xl shadow-sm mb-6 group-hover:scale-110 transition-transform">☕</div>
                     <h3 class="text-2xl font-black text-gray-900 mb-1">Medicines</h3>
-                    <p class="text-gray-500 text-sm font-medium mb-6">Prescriptions delivered fast from local pharmacies.</p>
-                    <div class="bg-white px-5 py-2.5 rounded-xl text-[10px] font-black shadow-sm group-hover:bg-black group-hover:text-[#f2ca52] transition-colors">BOOK NOW →</div>
-                </button>
+                    <p class="text-gray-500 text-sm font-medium mb-6">Pharmacy pickups and prescription deliveries.</p>
+                    <div class="bg-white px-5 py-2.5 rounded-xl text-[10px] font-black shadow-sm group-hover:bg-black group-hover:text-[#f2ca52] transition-colors inline-block uppercase">Order Now →</div>
+                </div>
 
-                <button onclick="showOrder('Household Items', '🏡', 'bg-emerald-50')" class="bg-emerald-50 p-8 rounded-[3rem] border-2 border-transparent hover:border-emerald-200 transition-all hover:shadow-xl active:scale-95 text-left group">
+                <div onclick="showOrder('Household Items', '🏡', 'bg-emerald-50')" class="service-card bg-emerald-50 p-8 rounded-[3rem] border-2 border-transparent hover:border-emerald-200 transition-all hover:shadow-xl cursor-pointer group">
                     <div class="bg-white w-16 h-16 rounded-2xl flex items-center justify-center text-4xl shadow-sm mb-6 group-hover:scale-110 transition-transform">🏡</div>
                     <h3 class="text-2xl font-black text-gray-900 mb-1">Household Items</h3>
-                    <p class="text-gray-500 text-sm font-medium mb-6">Daily essentials, groceries, and home needs.</p>
-                    <div class="bg-white px-5 py-2.5 rounded-xl text-[10px] font-black shadow-sm group-hover:bg-black group-hover:text-[#f2ca52] transition-colors">BOOK NOW →</div>
-                </button>
+                    <p class="text-gray-500 text-sm font-medium mb-6">Groceries, essentials, and home utilities.</p>
+                    <div class="bg-white px-5 py-2.5 rounded-xl text-[10px] font-black shadow-sm group-hover:bg-black group-hover:text-[#f2ca52] transition-colors inline-block uppercase">Order Now →</div>
+                </div>
 
-                <button onclick="showOrder('Documents & Files', '📄', 'bg-rose-50')" class="bg-rose-50 p-8 rounded-[3rem] border-2 border-transparent hover:border-rose-200 transition-all hover:shadow-xl active:scale-95 text-left group">
+                <div onclick="showOrder('Documents & Files', '📄', 'bg-rose-50')" class="service-card bg-rose-50 p-8 rounded-[3rem] border-2 border-transparent hover:border-rose-200 transition-all hover:shadow-xl cursor-pointer group">
                     <div class="bg-white w-16 h-16 rounded-2xl flex items-center justify-center text-4xl shadow-sm mb-6 group-hover:scale-110 transition-transform">📄</div>
                     <h3 class="text-2xl font-black text-gray-900 mb-1">Documents & Files</h3>
-                    <p class="text-gray-500 text-sm font-medium mb-6">Secure, confidential, and instant document moving.</p>
-                    <div class="bg-white px-5 py-2.5 rounded-xl text-[10px] font-black shadow-sm group-hover:bg-black group-hover:text-[#f2ca52] transition-colors">BOOK NOW →</div>
-                </button>
+                    <p class="text-gray-500 text-sm font-medium mb-6">Confidential and secure document transport.</p>
+                    <div class="bg-white px-5 py-2.5 rounded-xl text-[10px] font-black shadow-sm group-hover:bg-black group-hover:text-[#f2ca52] transition-colors inline-block uppercase">Order Now →</div>
+                </div>
 
-                <button onclick="showOrder('Others (Custom Fetch)', '🛋', 'bg-gray-50')" class="bg-gray-50 p-8 rounded-[3rem] border-2 border-transparent hover:border-gray-200 transition-all hover:shadow-xl active:scale-95 text-left group">
+                <div onclick="showOrder('Others (Custom Fetch)', '🛋', 'bg-gray-50')" class="service-card bg-gray-50 p-8 rounded-[3rem] border-2 border-transparent hover:border-gray-200 transition-all hover:shadow-xl cursor-pointer group">
                     <div class="bg-white w-16 h-16 rounded-2xl flex items-center justify-center text-4xl shadow-sm mb-6 group-hover:scale-110 transition-transform">🛋</div>
                     <h3 class="text-2xl font-black text-gray-900 mb-1">Others</h3>
-                    <p class="text-gray-500 text-sm font-medium mb-6">Custom fetch requests for any other items.</p>
-                    <div class="bg-white px-5 py-2.5 rounded-xl text-[10px] font-black shadow-sm group-hover:bg-black group-hover:text-[#f2ca52] transition-colors">BOOK NOW →</div>
-                </button>
-            </div>
-
-            <div class="bg-black rounded-[3rem] p-10 text-white flex flex-col md:flex-row items-center justify-between shadow-2xl relative overflow-hidden group">
-                <div class="relative z-10 text-center md:text-left">
-                    <div class="bg-[#f2ca52] text-black text-[9px] font-black uppercase px-3 py-1 rounded-full w-max mb-4 mx-auto md:mx-0">Membership</div>
-                    <h3 class="text-3xl font-black mb-2 tracking-tighter italic">GrabGo Prime</h3>
-                    <p class="text-gray-400 max-w-sm text-sm font-medium">Flat ₹80 delivery for all your monthly errands. Coming Soon!</p>
-                </div>
-                <button class="bg-[#f2ca52] text-black px-8 py-4 rounded-2xl font-black text-sm relative z-10 mt-8 md:mt-0 hover:bg-white transition-all active:scale-95">Notify Me</button>
-                <div class="absolute -right-10 -bottom-10 text-white/5 rotate-12 group-hover:rotate-0 transition-transform duration-700 select-none">
-                    <div class="text-[200px] font-black italic tracking-tighter">GG</div>
+                    <p class="text-gray-500 text-sm font-medium mb-6">Need something else? We'll fetch it for you.</p>
+                    <div class="bg-white px-5 py-2.5 rounded-xl text-[10px] font-black shadow-sm group-hover:bg-black group-hover:text-[#f2ca52] transition-colors inline-block uppercase">Order Now →</div>
                 </div>
             </div>
         </main>
@@ -105,25 +95,119 @@
         <button onclick="showDashboard()" class="mb-8 font-black text-gray-400 text-xs tracking-[0.2em] uppercase hover:text-black transition-colors flex items-center gap-2">
             <span>←</span> Back to Services
         </button>
+        
         <div class="bg-white rounded-[3rem] shadow-2xl border border-gray-100 overflow-hidden">
-            <div id="order-header" class="p-10 text-white flex justify-between items-center bg-black">
+            <div class="p-10 text-white flex justify-between items-center bg-black">
                 <div>
-                    <h3 id="selected-service-name" class="text-3xl font-black tracking-tight">Service</h3>
-                    <p class="text-gray-400 text-[10px] font-bold uppercase tracking-widest mt-1">Weight must be &lt; 1KG</p>
+                    <h3 id="order-title" class="text-3xl font-black tracking-tight italic">Service</h3>
+                    <p class="text-gray-400 text-[10px] font-bold uppercase tracking-widest mt-1">Shillong Express</p>
                 </div>
-                <div class="text-center">
-                    <span class="bg-[#f2ca52] text-black px-6 py-2 rounded-2xl font-black italic text-2xl shadow-lg">₹180</span>
-                    <p class="text-[9px] text-gray-400 font-bold mt-2 uppercase tracking-widest">FLAT FEE</p>
+                <div class="text-right">
+                    <span id="display-price" class="bg-[#f2ca52] text-black px-6 py-2 rounded-2xl font-black italic text-2xl shadow-lg shadow-yellow-500/20">₹100</span>
+                    <p class="text-[9px] text-gray-400 font-bold mt-2 uppercase tracking-widest">Estimated Total</p>
                 </div>
             </div>
-            <form onsubmit="placeOrder(event)" class="p-10 space-y-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <input type="tel" required placeholder="Mobile Number" class="w-full p-5 bg-gray-50 rounded-2xl border-2 border-transparent font-bold outline-none transition-all">
-                    <input type="text" required placeholder="Item Description" class="w-full p-5 bg-gray-50 rounded-2xl border-2 border-transparent font-bold outline-none transition-all">
+
+            <form id="delivery-form" onsubmit="handleFormSubmit(event)" class="p-10 space-y-6">
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <div id="btn-normal" onclick="setDelivery('Normal')" class="p-4 rounded-2xl border-2 border-gray-100 text-center cursor-pointer transition-all option-selected">
+                        <p class="font-black text-sm uppercase">Normal</p>
+                        <p class="text-[10px] font-bold opacity-70 italic">₹100 (Today)</p>
+                    </div>
+                    <div id="btn-express" onclick="setDelivery('Express')" class="p-4 rounded-2xl border-2 border-gray-100 text-center cursor-pointer transition-all">
+                        <p class="font-black text-sm uppercase">Urgency</p>
+                        <p class="text-[10px] font-bold opacity-70 italic">₹180 (Instant)</p>
+                    </div>
                 </div>
-                <input type="text" required placeholder="Pickup Address (Shillong)" class="w-full p-5 bg-gray-50 rounded-2xl border-2 border-transparent font-bold outline-none transition-all">
-                <input type="text" required placeholder="Delivery Destination" class="w-full p-5 bg-gray-50 rounded-2xl border-2 border-transparent font-bold outline-none transition-all">
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-1">
+                        <label class="text-[10px] font-black uppercase text-gray-400 ml-2">Phone Number</label>
+                        <input type="tel" required name="phone" placeholder="000-000-0000" class="w-full p-5 bg-gray-50 rounded-2xl border-2 border-transparent font-bold">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-[10px] font-black uppercase text-gray-400 ml-2">Item Details</label>
+                        <input type="text" required name="item" placeholder="e.g. 2 Files, Blue Bag" class="w-full p-5 bg-gray-50 rounded-2xl border-2 border-transparent font-bold">
+                    </div>
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-[10px] font-black uppercase text-gray-400 ml-2">Pickup Address</label>
+                    <input type="text" required name="pickup" placeholder="House/Shop Name, Locality" class="w-full p-5 bg-gray-50 rounded-2xl border-2 border-transparent font-bold">
+                </div>
+
+                <div class="space-y-1">
+                    <label class="text-[10px] font-black uppercase text-gray-400 ml-2">Drop Destination</label>
+                    <input type="text" required name="drop" placeholder="Landmark, Area in Shillong" class="w-full p-5 bg-gray-50 rounded-2xl border-2 border-transparent font-bold">
+                </div>
                 
                 <div class="p-5 bg-red-50 rounded-2xl border-2 border-red-100">
                     <p class="text-[10px] font-black text-red-800 uppercase leading-relaxed text-center">
-                        Note
+                        Note: Weight must be below 1 KG. Prohibited items (Liquor/Weapons) are not allowed.
+                    </p>
+                </div>
+
+                <button type="submit" class="w-full py-6 rounded-[1.5rem] font-black text-xl yellow-gradient shadow-2xl shadow-yellow-100 active:scale-95 transition-all mt-4 uppercase border-b-4 border-black/10">
+                    Request Fetch Now
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let currentPrice = 100;
+        let deliveryType = "Normal";
+
+        function showDashboard() {
+            document.getElementById('view-home').classList.add('hidden');
+            document.getElementById('view-order').classList.add('hidden');
+            document.getElementById('view-dashboard').classList.remove('hidden');
+            window.scrollTo(0,0);
+        }
+
+        function showOrder(name, icon) {
+            document.getElementById('view-dashboard').classList.add('hidden');
+            document.getElementById('view-order').classList.remove('hidden');
+            document.getElementById('order-title').innerText = name;
+            setDelivery('Normal'); // Reset to default when opening
+            window.scrollTo(0,0);
+        }
+
+        function setDelivery(type) {
+            deliveryType = type;
+            const btnNormal = document.getElementById('btn-normal');
+            const btnExpress = document.getElementById('btn-express');
+            const priceDisplay = document.getElementById('display-price');
+
+            if (type === 'Normal') {
+                currentPrice = 100;
+                btnNormal.classList.add('option-selected');
+                btnExpress.classList.remove('option-selected');
+            } else {
+                currentPrice = 180;
+                btnExpress.classList.add('option-selected');
+                btnNormal.classList.remove('option-selected');
+            }
+            priceDisplay.innerText = "₹" + currentPrice;
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            
+            // Check if fields are valid
+            const form = e.target;
+            const formData = new FormData(form);
+            
+            // Simple validation check (Browser 'required' handles most, this is double safety)
+            if (!formData.get('phone') || !formData.get('pickup') || !formData.get('drop')) {
+                alert('Please fill in all details.');
+                return;
+            }
+
+            alert(`Order Confirmed!\n\nService: ${document.getElementById('order-title').innerText}\nType: ${deliveryType}\nTotal: ₹${currentPrice}\n\nA rider will call you shortly.`);
+            form.reset();
+            showDashboard();
+        }
+    </script>
+</body>
+</html>
