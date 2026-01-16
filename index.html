@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>GrabGo - Instant Local Pickup & Delivery | Shillong</title>
+    <title>GrabGo - Shillong Instant Delivery</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #fcfcfc; -webkit-tap-highlight-color: transparent; }
-        .animate-fade { animation: fadeIn 0.4s ease-out; }
+        body { font-family: 'Inter', sans-serif; background-color: #fcfcfc; }
+        .animate-fade-in { animation: fadeIn 0.3s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
     </style>
     <script type="importmap">
     {
@@ -30,26 +31,27 @@
         import ReactDOM from 'react-dom/client';
         import * as Lucide from 'lucide-react';
 
-        const { Package, Clock, MapPin, Pill, Home, FileText, Settings, LogOut, LayoutDashboard, History, ShieldCheck, ChevronRight, Send, ArrowLeft, Info, AlertTriangle, ShieldAlert, XCircle } = Lucide;
+        const { Package, Pill, Home, FileText, Settings, LayoutDashboard, History, LogOut, MapPin, ChevronRight, ArrowLeft, Send, CreditCard, ShieldAlert, CheckCircle2, AlertTriangle } = Lucide;
 
         const ADMIN_EMAIL = "admin@grabgo.in";
 
         const SERVICE_CATEGORIES = [
-          { id: 'medicines', name: 'Medicines', icon: <Pill size={32} />, bgColor: 'bg-rose-50', border: 'hover:border-rose-200' },
-          { id: 'household', name: 'Household Items', icon: <Home size={32} />, bgColor: 'bg-emerald-50', border: 'hover:border-emerald-200' },
-          { id: 'documents', name: 'Documents & Files', icon: <FileText size={32} />, bgColor: 'bg-blue-50', border: 'hover:border-blue-200' },
-          { id: 'others', name: 'Others (Custom)', icon: <Settings size={32} />, bgColor: 'bg-gray-100', border: 'hover:border-gray-300' }
+          { id: 'medicines', name: 'Medicines', icon: <Pill size={28} />, bgColor: 'bg-rose-50', color: 'text-rose-600' },
+          { id: 'household', name: 'Household Items', icon: <Home size={28} />, bgColor: 'bg-emerald-50', color: 'text-emerald-600' },
+          { id: 'documents', name: 'Documents & Files', icon: <FileText size={28} />, bgColor: 'bg-blue-50', color: 'text-blue-600' },
+          { id: 'others', name: 'Others (Custom)', icon: <Settings size={28} />, bgColor: 'bg-gray-50', color: 'text-gray-600' }
         ];
 
         const App = () => {
             const [user, setUser] = useState(null);
             const [currentView, setCurrentView] = useState('home');
             const [selectedService, setSelectedService] = useState(null);
+            const [orders, setOrders] = useState([]);
+
+            // --- Views ---
 
             const HomeView = () => {
-                const [agreed, setAgreed] = useState(false);
                 const handleLogin = () => {
-                    if (!agreed) { alert("Please read and agree to the Safety Disclaimer."); return; }
                     const email = prompt("Enter your Gmail:", "biswajit.mgla@gmail.com");
                     if (email) {
                         const name = email.split(/[.@]/)[0];
@@ -59,122 +61,7 @@
                 };
 
                 return (
-                    <div className="flex flex-col items-center justify-center min-h-screen text-center px-6 py-10 animate-fade">
-                        <div className="bg-[#f2ca52] p-5 rounded-3xl shadow-xl mb-6"><Package size={48} /></div>
-                        <h1 className="text-5xl font-black tracking-tighter mb-2">GrabGo</h1>
-                        <p className="text-gray-400 font-bold uppercase tracking-widest text-xs mb-8">Shillong's Responsible Delivery</p>
-                        
-                        {/* RESTRICTED ITEMS BOX */}
-                        <div className="w-full max-w-sm bg-red-50 border-2 border-red-100 p-6 rounded-[2rem] mb-6 text-left">
-                            <div className="flex items-center gap-2 text-red-600 mb-3">
-                                <ShieldAlert size={18} />
-                                <span className="font-black uppercase text-xs tracking-widest">Strictly Prohibited</span>
-                            </div>
-                            <ul className="grid grid-cols-2 gap-2">
-                                {['Liquor / Alcohol', 'Weapons', 'Illegal Drugs', 'Bulk (>1 KG)'].map(item => (
-                                    <li key={item} className="flex items-center gap-2 text-[10px] font-black text-red-800 uppercase">
-                                        <XCircle size={12} /> {item}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-
-                        {/* DISCLAIMER CHECKBOX */}
-                        <div className="w-full max-w-sm bg-white p-6 rounded-3xl border border-gray-100 shadow-sm mb-8">
-                            <label className="flex items-start gap-3 cursor-pointer text-left">
-                                <input type="checkbox" checked={agreed} onChange={(e) => setAgreed(e.target.checked)} className="mt-1 w-6 h-6 accent-black rounded shadow-sm" />
-                                <span className="text-[11px] text-gray-500 leading-relaxed">
-                                    I certify that my items are <span className="text-black font-bold">below 1 KG</span> and do not contain <span className="text-black font-bold">liquor, weapons, or restricted substances</span>. I understand that riders will inspect items and GrabGo will report illegal activities to the Shillong Police.
-                                </span>
-                            </label>
-                        </div>
-
-                        <button onClick={handleLogin} className={`w-full max-w-xs py-4 rounded-2xl font-black transition-all flex items-center justify-center gap-3 shadow-lg ${agreed ? 'bg-[#f2ca52] text-black active:scale-95' : 'bg-gray-200 text-gray-400 cursor-not-allowed'}`}>
-                            <img src="https://www.google.com/favicon.ico" className="w-5 h-5" /> Sign in with Google
-                        </button>
-                    </div>
-                );
-            };
-
-            const DashboardView = () => (
-                <div className="space-y-6 animate-fade px-4">
-                    <div className="flex justify-between items-center">
-                        <div>
-                            <h2 className="text-3xl font-black">Kumno, {user.name}!</h2>
-                            <p className="text-gray-500 font-medium">Safe & Legal delivery in Shillong.</p>
-                        </div>
-                        <div className="bg-[#f2ca52] p-3 rounded-2xl"><MapPin size={24} /></div>
-                    </div>
-
-                    <div className="bg-red-600 text-white p-4 rounded-2xl flex items-center gap-4 shadow-lg shadow-red-100">
-                        <AlertTriangle className="shrink-0" />
-                        <p className="text-[10px] font-black uppercase tracking-widest leading-tight">Zero Tolerance: No Liquor, No Weapons, Max 1 KG. Items will be checked.</p>
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        {SERVICE_CATEGORIES.map(s => (
-                            <button key={s.id} onClick={() => { setSelectedService(s.id); setCurrentView('order-form'); }} className={`${s.bgColor} p-8 rounded-[2.5rem] border-2 border-transparent ${s.border} transition-all text-left group`}>
-                                <div className="bg-white p-4 rounded-2xl w-max shadow-sm mb-4 group-hover:scale-110 transition-transform">{s.icon}</div>
-                                <h3 className="text-xl font-extrabold">{s.name}</h3>
-                                <div className="mt-4 flex items-center text-xs font-black uppercase tracking-widest opacity-60">Book Delivery <ChevronRight size={14} /></div>
-                            </button>
-                        ))}
-                    </div>
-                </div>
-            );
-
-            // Shared Navbar
-            const Navbar = () => (
-                <nav className="bg-white border-b sticky top-0 z-50 px-4 h-20 flex items-center justify-between">
-                    <div className="flex items-center gap-2 font-black text-2xl tracking-tighter" onClick={() => setCurrentView('dashboard')}>
-                        <div className="bg-[#f2ca52] p-1.5 rounded-lg"><Package size={20}/></div> GrabGo
-                    </div>
-                    <div className="flex gap-2">
-                        <button onClick={() => setCurrentView('dashboard')} className={`p-3 rounded-xl ${currentView === 'dashboard' ? 'bg-[#f2ca52]' : 'text-gray-400'}`}><LayoutDashboard size={20}/></button>
-                        <button onClick={() => setCurrentView('history')} className={`p-3 rounded-xl ${currentView === 'history' ? 'bg-[#f2ca52]' : 'text-gray-400'}`}><History size={20}/></button>
-                        <button onClick={() => setUser(null)} className="p-3 rounded-xl text-red-400"><LogOut size={20}/></button>
-                    </div>
-                </nav>
-            );
-
-            return (
-                <div className="min-h-screen bg-gray-50 flex flex-col">
-                    {user && <Navbar />}
-                    <main className="flex-grow max-w-4xl mx-auto w-full py-8">
-                        {!user ? <HomeView /> : (
-                            <>
-                                {currentView === 'dashboard' && <DashboardView />}
-                                {currentView === 'order-form' && (
-                                    <div className="p-4 animate-fade">
-                                        <button onClick={() => setCurrentView('dashboard')} className="flex items-center font-bold text-gray-400 mb-6"><ArrowLeft size={18} className="mr-2"/> Back</button>
-                                        <div className="bg-white p-8 rounded-[2.5rem] shadow-sm border relative">
-                                            <div className="absolute top-6 right-8 bg-red-100 text-red-700 px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest">Legal Check Required</div>
-                                            <h2 className="text-3xl font-black mb-2 tracking-tight">Confirm Order</h2>
-                                            <p className="text-gray-400 text-sm font-bold mb-8">{SERVICE_CATEGORIES.find(s=>s.id===selectedService)?.name}</p>
-                                            
-                                            <div className="bg-gray-50 p-6 rounded-2xl mb-8 space-y-4">
-                                                <div className="flex justify-between border-b pb-2"><span className="text-xs text-gray-400 font-bold uppercase">Weight Limit</span><span className="text-xs font-black">Max 1 KG</span></div>
-                                                <div className="flex justify-between"><span className="text-xs text-gray-400 font-bold uppercase">Delivery Charge</span><span className="text-xs font-black">₹180</span></div>
-                                            </div>
-
-                                            <button onClick={() => { alert('Order placed! Items will be inspected on arrival.'); setCurrentView('dashboard'); }} className="w-full bg-[#f2ca52] py-5 rounded-2xl font-black text-lg shadow-xl hover:bg-black hover:text-[#f2ca52] transition-all">Confirm & Pay</button>
-                                            <p className="mt-6 text-[10px] text-gray-400 text-center font-bold uppercase tracking-widest flex items-center justify-center gap-2"><ShieldCheck size={14} className="text-green-500"/> Verified Safe Delivery</p>
-                                        </div>
-                                    </div>
-                                )}
-                                {currentView === 'history' && <div className="p-4 text-center py-20"><History size={48} className="mx-auto text-gray-200 mb-4"/><p className="font-bold text-gray-400 tracking-tight">No illegal or valid orders found.</p></div>}
-                            </>
-                        )}
-                    </main>
-                    <footer className="py-8 text-center text-gray-400 text-[10px] font-black uppercase tracking-[0.2em]">
-                        &copy; 2026 GrabGo • Shillong • Compliance Verified
-                    </footer>
-                </div>
-            );
-        };
-
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
-    </script>
-</body>
-</html>
+                    <div className="flex flex-col items-center justify-center min-h-[90vh] text-center px-6 animate-fade-in">
+                        <div className="bg-[#f2ca52] p-5 rounded-[2rem] shadow-2xl mb-8"><Package size={50} /></div>
+                        <h1 className="text-6xl font-black tracking-tighter mb-2 italic">GrabGo</h1>
+                        <p className="text-gray-400 font-bold uppercase tracking-[0.3em] text-xs mb-12">Shillong Quick
