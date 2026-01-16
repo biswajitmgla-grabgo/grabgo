@@ -3,211 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>GrabGo Shillong | Premium Delivery</title>
+    <title>GrabGo | Professional Delivery</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #fcfcfc; color: #1a1a1a; }
-        .yellow-gradient { background: linear-gradient(135deg, #f2ca52 0%, #e9b92e 100%); }
-        .animate-up { animation: fadeInUp 0.4s ease-out forwards; }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #ffffff; color: #111827; }
+        .yellow-primary { background-color: #f2ca52; }
+        .text-yellow-primary { color: #f2ca52; }
+        .animate-subtle { animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .hidden { display: none !important; }
-        .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
-        .service-card:active { transform: scale(0.97); }
-        input:focus, select:focus { border-color: #f2ca52 !important; outline: none; background: white !important; }
-        .option-selected { border-color: black !important; background-color: #f2ca52 !important; color: black !important; }
+        .card-shadow { box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05); }
+        .input-field { background: #f9fafb; border: 1px solid #f3f4f6; transition: all 0.2s; }
+        .input-field:focus { border-color: #f2ca52; background: #fff; ring: 2px; ring-color: #f2ca52; }
+        .grid-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+        @media (max-width: 640px) { .grid-container { gap: 12px; } }
     </style>
 </head>
-<body>
+<body class="antialiased">
 
-    <div id="view-home" class="flex flex-col items-center justify-center min-h-screen p-6 text-center animate-up">
-        <div class="yellow-gradient w-32 h-32 rounded-[2.5rem] mb-10 shadow-2xl flex items-center justify-center text-5xl shadow-yellow-200">📦</div>
-        <h1 class="text-7xl font-black tracking-tighter mb-2 italic text-gray-900">GrabGo</h1>
-        <div class="mb-14">
-            <p class="text-xl font-black text-gray-800 uppercase tracking-tight">QUICK DOCUMENTS & DOMESTIC DELIVERY</p>
-            <p class="text-[11px] font-bold text-red-500 uppercase mt-2 tracking-[0.25em]">WEIGHT BELOW 1KG ALWAYS</p>
+    <div id="view-home" class="flex flex-col items-center justify-center min-h-screen p-8 text-center animate-subtle">
+        <div class="yellow-primary w-24 h-24 rounded-[2rem] mb-12 shadow-2xl shadow-yellow-200 flex items-center justify-center text-4xl">📦</div>
+        <h1 class="text-6xl font-extrabold tracking-tighter mb-4 text-gray-900 italic">GrabGo</h1>
+        <div class="mb-16">
+            <p class="text-lg font-bold text-gray-700 uppercase tracking-tight">Quick Documents & Domestic Delivery</p>
+            <p class="text-[10px] font-extrabold text-red-500 uppercase mt-2 tracking-[0.3em]">Weight Below 1KG Always</p>
         </div>
-        <button onclick="showDashboard()" class="yellow-gradient px-12 py-5 rounded-2xl shadow-xl flex items-center gap-4 active:scale-95 transition-all font-black text-black uppercase tracking-tight border-b-4 border-black/10">
-            <img src="https://www.google.com/favicon.ico" class="w-5 h-5" /> Sign in with Google
-        </button>
-        <p class="mt-16 text-[10px] text-gray-400 font-bold uppercase tracking-widest">Shillong's Most Trusted Fetch Service</p>
-    </div>
-
-    <div id="view-dashboard" class="hidden min-h-screen pb-20">
-        <nav class="glass sticky top-0 z-50 border-b border-gray-100 px-6 py-5">
-            <div class="max-w-4xl mx-auto flex justify-between items-center">
-                <div class="flex items-center gap-2">
-                    <div class="bg-[#f2ca52] px-2 py-1 rounded-lg font-black italic text-sm shadow-sm">GG</div>
-                    <span class="text-2xl font-black tracking-tighter">GrabGo</span>
-                </div>
-                <button onclick="location.reload()" class="text-red-500 font-black text-[10px] uppercase tracking-widest hover:bg-red-50 px-3 py-2 rounded-lg transition-all">Logout</button>
-            </div>
-        </nav>
-
-        <main class="max-w-4xl mx-auto px-6 mt-8 animate-up">
-            <div class="bg-white p-8 rounded-[3rem] shadow-sm border border-gray-100 flex justify-between items-center mb-10">
-                <div>
-                    <div class="flex items-center gap-1 mb-1">
-                        <span class="text-[#f2ca52]">📍</span>
-                        <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Live: Shillong, Meghalaya</p>
-                    </div>
-                    <h2 class="text-4xl font-black text-gray-900 tracking-tight">Kumno, Friend!</h2>
-                    <p class="text-gray-500 font-medium mt-1">What can we fetch for you today?</p>
-                </div>
-                <div class="w-16 h-16 rounded-[1.5rem] border-4 border-white shadow-2xl overflow-hidden bg-gray-100">
-                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="User Avatar">
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-                <div onclick="showOrder('Medicines', '☕', 'bg-blue-50')" class="service-card bg-blue-50 p-8 rounded-[3rem] border-2 border-transparent hover:border-blue-200 transition-all hover:shadow-xl cursor-pointer group">
-                    <div class="bg-white w-16 h-16 rounded-2xl flex items-center justify-center text-4xl shadow-sm mb-6 group-hover:scale-110 transition-transform">☕</div>
-                    <h3 class="text-2xl font-black text-gray-900 mb-1">Medicines</h3>
-                    <p class="text-gray-500 text-sm font-medium mb-6">Pharmacy pickups and prescription deliveries.</p>
-                    <div class="bg-white px-5 py-2.5 rounded-xl text-[10px] font-black shadow-sm group-hover:bg-black group-hover:text-[#f2ca52] transition-colors inline-block uppercase">Order Now →</div>
-                </div>
-
-                <div onclick="showOrder('Household Items', '🏡', 'bg-emerald-50')" class="service-card bg-emerald-50 p-8 rounded-[3rem] border-2 border-transparent hover:border-emerald-200 transition-all hover:shadow-xl cursor-pointer group">
-                    <div class="bg-white w-16 h-16 rounded-2xl flex items-center justify-center text-4xl shadow-sm mb-6 group-hover:scale-110 transition-transform">🏡</div>
-                    <h3 class="text-2xl font-black text-gray-900 mb-1">Household Items</h3>
-                    <p class="text-gray-500 text-sm font-medium mb-6">Groceries, essentials, and home utilities.</p>
-                    <div class="bg-white px-5 py-2.5 rounded-xl text-[10px] font-black shadow-sm group-hover:bg-black group-hover:text-[#f2ca52] transition-colors inline-block uppercase">Order Now →</div>
-                </div>
-
-                <div onclick="showOrder('Documents & Files', '📄', 'bg-rose-50')" class="service-card bg-rose-50 p-8 rounded-[3rem] border-2 border-transparent hover:border-rose-200 transition-all hover:shadow-xl cursor-pointer group">
-                    <div class="bg-white w-16 h-16 rounded-2xl flex items-center justify-center text-4xl shadow-sm mb-6 group-hover:scale-110 transition-transform">📄</div>
-                    <h3 class="text-2xl font-black text-gray-900 mb-1">Documents & Files</h3>
-                    <p class="text-gray-500 text-sm font-medium mb-6">Confidential and secure document transport.</p>
-                    <div class="bg-white px-5 py-2.5 rounded-xl text-[10px] font-black shadow-sm group-hover:bg-black group-hover:text-[#f2ca52] transition-colors inline-block uppercase">Order Now →</div>
-                </div>
-
-                <div onclick="showOrder('Others (Custom Fetch)', '🛋', 'bg-gray-50')" class="service-card bg-gray-50 p-8 rounded-[3rem] border-2 border-transparent hover:border-gray-200 transition-all hover:shadow-xl cursor-pointer group">
-                    <div class="bg-white w-16 h-16 rounded-2xl flex items-center justify-center text-4xl shadow-sm mb-6 group-hover:scale-110 transition-transform">🛋</div>
-                    <h3 class="text-2xl font-black text-gray-900 mb-1">Others</h3>
-                    <p class="text-gray-500 text-sm font-medium mb-6">Need something else? We'll fetch it for you.</p>
-                    <div class="bg-white px-5 py-2.5 rounded-xl text-[10px] font-black shadow-sm group-hover:bg-black group-hover:text-[#f2ca52] transition-colors inline-block uppercase">Order Now →</div>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <div id="view-order" class="hidden max-w-2xl mx-auto p-6 animate-up min-h-screen">
-        <button onclick="showDashboard()" class="mb-8 font-black text-gray-400 text-xs tracking-[0.2em] uppercase hover:text-black transition-colors flex items-center gap-2">
-            <span>←</span> Back to Services
-        </button>
-        
-        <div class="bg-white rounded-[3rem] shadow-2xl border border-gray-100 overflow-hidden">
-            <div class="p-10 text-white flex justify-between items-center bg-black">
-                <div>
-                    <h3 id="order-title" class="text-3xl font-black tracking-tight italic">Service</h3>
-                    <p class="text-gray-400 text-[10px] font-bold uppercase tracking-widest mt-1">Shillong Express</p>
-                </div>
-                <div class="text-right">
-                    <span id="display-price" class="bg-[#f2ca52] text-black px-6 py-2 rounded-2xl font-black italic text-2xl shadow-lg shadow-yellow-500/20">₹100</span>
-                    <p class="text-[9px] text-gray-400 font-bold mt-2 uppercase tracking-widest">Estimated Total</p>
-                </div>
-            </div>
-
-            <form id="delivery-form" onsubmit="handleFormSubmit(event)" class="p-10 space-y-6">
-                <div class="grid grid-cols-2 gap-4 mb-4">
-                    <div id="btn-normal" onclick="setDelivery('Normal')" class="p-4 rounded-2xl border-2 border-gray-100 text-center cursor-pointer transition-all option-selected">
-                        <p class="font-black text-sm uppercase">Normal</p>
-                        <p class="text-[10px] font-bold opacity-70 italic">₹100 (Today)</p>
-                    </div>
-                    <div id="btn-express" onclick="setDelivery('Express')" class="p-4 rounded-2xl border-2 border-gray-100 text-center cursor-pointer transition-all">
-                        <p class="font-black text-sm uppercase">Urgency</p>
-                        <p class="text-[10px] font-bold opacity-70 italic">₹180 (Instant)</p>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="space-y-1">
-                        <label class="text-[10px] font-black uppercase text-gray-400 ml-2">Phone Number</label>
-                        <input type="tel" required name="phone" placeholder="000-000-0000" class="w-full p-5 bg-gray-50 rounded-2xl border-2 border-transparent font-bold">
-                    </div>
-                    <div class="space-y-1">
-                        <label class="text-[10px] font-black uppercase text-gray-400 ml-2">Item Details</label>
-                        <input type="text" required name="item" placeholder="e.g. 2 Files, Blue Bag" class="w-full p-5 bg-gray-50 rounded-2xl border-2 border-transparent font-bold">
-                    </div>
-                </div>
-
-                <div class="space-y-1">
-                    <label class="text-[10px] font-black uppercase text-gray-400 ml-2">Pickup Address</label>
-                    <input type="text" required name="pickup" placeholder="House/Shop Name, Locality" class="w-full p-5 bg-gray-50 rounded-2xl border-2 border-transparent font-bold">
-                </div>
-
-                <div class="space-y-1">
-                    <label class="text-[10px] font-black uppercase text-gray-400 ml-2">Drop Destination</label>
-                    <input type="text" required name="drop" placeholder="Landmark, Area in Shillong" class="w-full p-5 bg-gray-50 rounded-2xl border-2 border-transparent font-bold">
-                </div>
-                
-                <div class="p-5 bg-red-50 rounded-2xl border-2 border-red-100">
-                    <p class="text-[10px] font-black text-red-800 uppercase leading-relaxed text-center">
-                        Note: Weight must be below 1 KG. Prohibited items (Liquor/Weapons) are not allowed.
-                    </p>
-                </div>
-
-                <button type="submit" class="w-full py-6 rounded-[1.5rem] font-black text-xl yellow-gradient shadow-2xl shadow-yellow-100 active:scale-95 transition-all mt-4 uppercase border-b-4 border-black/10">
-                    Request Fetch Now
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <script>
-        let currentPrice = 100;
-        let deliveryType = "Normal";
-
-        function showDashboard() {
-            document.getElementById('view-home').classList.add('hidden');
-            document.getElementById('view-order').classList.add('hidden');
-            document.getElementById('view-dashboard').classList.remove('hidden');
-            window.scrollTo(0,0);
-        }
-
-        function showOrder(name, icon) {
-            document.getElementById('view-dashboard').classList.add('hidden');
-            document.getElementById('view-order').classList.remove('hidden');
-            document.getElementById('order-title').innerText = name;
-            setDelivery('Normal'); // Reset to default when opening
-            window.scrollTo(0,0);
-        }
-
-        function setDelivery(type) {
-            deliveryType = type;
-            const btnNormal = document.getElementById('btn-normal');
-            const btnExpress = document.getElementById('btn-express');
-            const priceDisplay = document.getElementById('display-price');
-
-            if (type === 'Normal') {
-                currentPrice = 100;
-                btnNormal.classList.add('option-selected');
-                btnExpress.classList.remove('option-selected');
-            } else {
-                currentPrice = 180;
-                btnExpress.classList.add('option-selected');
-                btnNormal.classList.remove('option-selected');
-            }
-            priceDisplay.innerText = "₹" + currentPrice;
-        }
-
-        function handleFormSubmit(e) {
-            e.preventDefault();
-            
-            // Check if fields are valid
-            const form = e.target;
-            const formData = new FormData(form);
-            
-            // Simple validation check (Browser 'required' handles most, this is double safety)
-            if (!formData.get('phone') || !formData.get('pickup') || !formData.get('drop')) {
-                alert('Please fill in all details.');
-                return;
-            }
-
-            alert(`Order Confirmed!\n\nService: ${document.getElementById('order-title').innerText}\nType: ${deliveryType}\nTotal: ₹${currentPrice}\n\nA rider will call you shortly.`);
-            form.reset();
-            showDashboard();
-        }
-    </script>
-</body>
-</html>
+        <button onclick="showDashboard()" class="yellow-primary w-full max-w-xs py-5 rounded-2xl shadow-lg flex items-center justify-center gap-4 active:scale-95 transition-all font-extrabold text-black uppercase tracking-
