@@ -39,17 +39,23 @@
         import ReactDOM from 'react-dom/client';
         import * as Lucide from 'lucide-react';
 
-        // --- PASTE YOUR App.tsx CODE HERE ---
-        // Example structure:
-        const App = () => {
-            return (
-                <div className="p-10 text-center">
-                    <h1 className="text-3xl font-bold text-orange-500">GrabGo is Live!</h1>
-                    <p className="mt-4">Shillong's fastest delivery service.</p>
-                </div>
-            );
-        };
-        // --- END OF PASTE ---
+        import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App.tsx';
+
+console.log("GrabGo: Starting application...");
+
+const rootElement = document.getElementById('root');
+if (!rootElement) {
+  throw new Error("Could not find root element to mount to");
+}
+
+const root = ReactDOM.createRoot(rootElement);
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
 
         const rootElement = document.getElementById('root');
         const root = ReactDOM.createRoot(rootElement);
