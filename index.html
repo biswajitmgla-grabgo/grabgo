@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>GrabGo Shillong</title>
+    <title>GrabGo Shillong | Professional</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #fcfcfc; }
-        .yellow-btn { background-color: #f2ca52; color: black; font-weight: 900; }
-        .animate-in { animation: fadeIn 0.3s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        body { font-family: 'Inter', sans-serif; background-color: #f9fafb; margin: 0; }
+        .yellow-gradient { background: linear-gradient(135deg, #f2ca52 0%, #e9b92e 100%); }
+        .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+        .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); }
     </style>
 </head>
 <body>
@@ -21,107 +22,75 @@
 
     <script type="text/babel">
         const { useState, useEffect } = React;
-        
+
         const App = () => {
             const [user, setUser] = useState(null);
-            const [view, setView] = useState('home'); // home, dashboard, order
-            const [selectedService, setSelectedService] = useState('');
+            const [view, setView] = useState('home'); 
+            const [selectedService, setSelectedService] = useState(null);
 
-            // YOUR SPECIFIC SERVICES
             const services = [
-                { id: 1, name: 'Medicines', icon: '☕', desc: 'Fast pharmacy delivery.' },
-                { id: 2, name: 'Household Items', icon: '🏡', desc: 'Daily essentials for home.' },
-                { id: 3, name: 'Documents & Files', icon: '📄', desc: 'Secure & instant handling.' },
-                { id: 4, name: 'Others (Custom Fetch)', icon: '🛋', desc: 'Custom pickup requests.' }
+                { id: 'meds', name: 'Medicines', icon: '☕', color: 'bg-blue-50', border: 'hover:border-blue-200', desc: 'Prescriptions delivered fast.' },
+                { id: 'house', name: 'Household Items', icon: '🏡', color: 'bg-emerald-50', border: 'hover:border-emerald-200', desc: 'Daily essentials & groceries.' },
+                { id: 'docs', name: 'Documents & Files', icon: '📄', color: 'bg-rose-50', border: 'hover:border-rose-200', desc: 'Safe & confidential handling.' },
+                { id: 'other', name: 'Others (Custom Fetch)', icon: '🛋', color: 'bg-gray-50', border: 'hover:border-gray-300', desc: 'Anything else you need moved.' }
             ];
 
-            const login = () => {
+            const handleLogin = () => {
                 const email = prompt("Enter Email:", "biswajit.mgla@gmail.com");
                 if (email) {
                     const name = email.split(/[.@]/)[0];
                     setUser({ 
                         name: name.charAt(0).toUpperCase() + name.slice(1),
-                        email: email,
                         photo: `https://api.dicebear.com/7.x/avataaars/svg?seed=${name}`
                     });
                     setView('dashboard');
                 }
             };
 
-            // 1. HOME VIEW
+            // --- 1. SLEEK HOME PAGE ---
             if (view === 'home') return (
-                <div className="flex flex-col items-center justify-center min-h-screen p-6 text-center animate-in">
-                    <div className="bg-[#f2ca52] w-24 h-24 rounded-[2rem] mb-8 shadow-xl flex items-center justify-center text-4xl">📦</div>
-                    <h1 className="text-6xl font-black tracking-tighter mb-4 italic text-gray-900">GrabGo</h1>
-                    <div className="mb-12">
+                <div className="flex flex-col items-center justify-center min-h-screen p-6 text-center animate-fade-in">
+                    <div className="yellow-gradient w-32 h-32 rounded-[2.5rem] mb-10 shadow-2xl flex items-center justify-center text-5xl">📦</div>
+                    <h1 className="text-7xl font-black tracking-tighter mb-2 italic text-gray-900">GrabGo</h1>
+                    <div className="mb-14">
                         <p className="text-xl font-black text-gray-800 uppercase tracking-tight">QUICK DOCUMENTS & DOMESTIC DELIVERY</p>
-                        <p className="text-sm font-bold text-red-500 uppercase mt-1 tracking-widest">WEIGHT BELOW 1KG ALWAYS</p>
+                        <p className="text-xs font-bold text-red-500 uppercase mt-2 tracking-[0.2em]">WEIGHT BELOW 1KG ALWAYS</p>
                     </div>
-                    <button onClick={login} className="yellow-btn px-10 py-5 rounded-2xl shadow-lg border-2 border-black flex items-center gap-3 active:scale-95 transition-all">
-                        <img src="https://www.google.com/favicon.ico" className="w-4 h-4" /> SIGN IN WITH GOOGLE
+                    <button onClick={handleLogin} className="yellow-gradient px-12 py-5 rounded-2xl shadow-xl border-b-4 border-black/10 flex items-center gap-4 active:scale-95 transition-all font-black text-black">
+                        <img src="https://www.google.com/favicon.ico" className="w-5 h-4" /> SIGN IN WITH GOOGLE
                     </button>
+                    <p className="mt-16 text-[10px] text-gray-400 font-bold uppercase tracking-widest">Available across Shillong City</p>
                 </div>
             );
 
-            // 2. DASHBOARD VIEW
+            // --- 2. PROFESSIONAL DASHBOARD ---
             if (view === 'dashboard') return (
-                <div className="max-w-md mx-auto p-6 animate-in">
-                    <div className="flex justify-between items-center mb-10">
-                        <div>
-                            <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Shillong Local</p>
-                            <h2 className="text-3xl font-black tracking-tight">Kumno, {user.name}!</h2>
+                <div className="min-h-screen pb-10">
+                    <nav className="glass sticky top-0 z-50 border-b border-gray-100 px-6 py-4 mb-8">
+                        <div className="max-w-4xl mx-auto flex justify-between items-center">
+                            <div className="flex items-center gap-2">
+                                <div className="bg-[#f2ca52] p-1.5 rounded-lg shadow-sm font-black italic">GG</div>
+                                <span className="text-xl font-black tracking-tighter">GrabGo</span>
+                            </div>
+                            <button onClick={() => setView('home')} className="text-red-500 font-black text-[10px] uppercase tracking-widest">Logout</button>
                         </div>
-                        <img src={user.photo} className="w-12 h-12 rounded-2xl border-2 border-[#f2ca52]" />
-                    </div>
-                    
-                    <div className="grid grid-cols-1 gap-4">
-                        {services.map(s => (
-                            <button key={s.id} onClick={() => { setSelectedService(s.name); setView('order'); }} 
-                                className="bg-white p-6 rounded-[2rem] flex items-center gap-5 shadow-sm border-2 border-gray-100 hover:border-[#f2ca52] transition-all active:scale-95 text-left group">
-                                <span className="text-4xl bg-gray-50 w-16 h-16 flex items-center justify-center rounded-2xl group-hover:scale-110 transition-transform">{s.icon}</span>
-                                <div>
-                                    <h3 className="text-xl font-black text-gray-800">{s.name}</h3>
-                                    <p className="text-xs text-gray-400 font-bold">{s.desc}</p>
-                                </div>
-                            </button>
-                        ))}
-                    </div>
-                    <button onClick={() => setView('home')} className="w-full mt-10 text-gray-400 font-bold text-xs uppercase tracking-widest">Logout</button>
-                </div>
-            );
+                    </nav>
 
-            // 3. ORDER FORM VIEW
-            if (view === 'order') return (
-                <div className="max-w-md mx-auto p-6 animate-in">
-                    <button onClick={() => setView('dashboard')} className="mb-6 font-black text-gray-400 text-xs tracking-widest uppercase">← Back</button>
-                    <div className="bg-white rounded-[2.5rem] shadow-2xl border border-gray-100 overflow-hidden">
-                        <div className="bg-black p-8 text-white flex justify-between items-center">
+                    <main className="max-w-4xl mx-auto px-6 animate-fade-in">
+                        <div className="bg-white p-8 rounded-[3rem] shadow-sm border border-gray-100 flex justify-between items-center mb-10">
                             <div>
-                                <h3 className="text-xl font-black uppercase tracking-tight">{selectedService}</h3>
-                                <p className="text-gray-400 text-[10px] font-bold">Standard Delivery</p>
+                                <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Current: Shillong</p>
+                                <h2 className="text-4xl font-black text-gray-900 tracking-tight">Kumno, {user.name}!</h2>
+                                <p className="text-gray-500 font-medium mt-1">What can we grab for you today?</p>
                             </div>
-                            <span className="bg-[#f2ca52] text-black px-4 py-1 rounded-lg font-black italic text-lg">₹180</span>
+                            <img src={user.photo} className="w-16 h-16 rounded-[1.5rem] border-4 border-white shadow-xl" />
                         </div>
-                        <div className="p-8 space-y-4">
-                            <input type="text" placeholder="Mobile Number" className="w-full p-4 bg-gray-50 rounded-xl border border-gray-100 font-bold outline-none focus:border-black transition-all" />
-                            <input type="text" placeholder="Pickup Address (Shillong)" className="w-full p-4 bg-gray-50 rounded-xl border border-gray-100 font-bold outline-none focus:border-black transition-all" />
-                            <input type="text" placeholder="Drop Address" className="w-full p-4 bg-gray-50 rounded-xl border border-gray-100 font-bold outline-none focus:border-black transition-all" />
-                            
-                            <div className="p-4 bg-red-50 rounded-xl border border-red-100 mt-4 text-[10px] font-black text-red-800 uppercase leading-tight">
-                                Note: Weight must be below 1 KG. Prohibited items (Liquor/Weapons) will be reported.
-                            </div>
 
-                            <button onClick={() => { alert('Order Placed! Our rider will call you.'); setView('dashboard'); }} className="w-full py-5 rounded-2xl font-black text-lg yellow-btn shadow-xl active:scale-95 transition-all mt-4">
-                                CONFIRM PICKUP
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            );
-        };
-
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
-    </script>
-</body>
-</html>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+                            {services.map(s => (
+                                <button key={s.id} onClick={() => { setSelectedService(s); setView('order'); }} 
+                                    className={`${s.color} p-8 rounded-[3rem] border-2 border-transparent ${s.border} transition-all hover:shadow-xl active:scale-[0.98] text-left group relative overflow-hidden`}>
+                                    <div className="bg-white w-16 h-16 rounded-2xl flex items-center justify-center text-4xl shadow-sm mb-6 group-hover:scale-110 transition-transform">{s.icon}</div>
+                                    <h3 className="text-2xl font-black text-gray-900 mb-1">{s.name}</h3>
+                                    <p className="text-gray-500 text-sm font-medium mb-6">{s.desc}</p>
+                                    <div className="bg-white px-5 py-2.5 rounded-xl
