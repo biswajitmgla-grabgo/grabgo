@@ -77,19 +77,45 @@
             </nav>
         );
 
-        const HomeView = ({ onLogin }) => (
-            <div className="flex flex-col items-center justify-center min-h-[80vh] text-center px-4 animate-fade-in">
-                <div className="mb-10 w-32 h-32 bg-[#f2ca52] rounded-3xl shadow-xl flex items-center justify-center"><Package className="w-16 h-16 text-black" /></div>
-                <h1 className="text-6xl font-black text-gray-900 mb-2 tracking-tighter">GrabGo</h1>
-                <p className="text-xl font-bold text-gray-500 mb-12 max-w-sm leading-relaxed uppercase tracking-tight">Quick Pickup & Dropping Service</p>
-                <div className="flex flex-col space-y-4 w-full max-w-xs">
-                    <button onClick={() => onLogin({ id: 'u1', name: "John Doe", email: "john@example.com", photo: "https://picsum.photos/seed/user/100/100", isAdmin: false })} className="flex items-center justify-center space-x-3 bg-[#f2ca52] text-black py-4 px-6 rounded-2xl shadow-lg font-bold hover:bg-black hover:text-[#f2ca52] transition-all">
-                        <img src="https://www.google.com/favicon.ico" className="w-5 h-5" /><span>Sign in with Google</span>
-                    </button>
-                    <button onClick={() => onLogin({ id: "admin-123", name: "GrabGo Admin", email: ADMIN_EMAIL, photo: "https://picsum.photos/seed/admin/100/100", isAdmin: true })} className="text-[10px] text-gray-300 hover:text-gray-500 transition-colors mt-12 uppercase tracking-widest font-bold">Administrator Access</button>
+        const HomeView = ({ onLogin }) => {
+            const handleGoogleSignIn = () => {
+                // 1. Get the email from a prompt (or your auth system)
+                const email = prompt("Enter your email to sign in:", "biswajit.mgla@gmail.com");
+                
+                if (email) {
+                    // 2. Extract the name: take everything before the "." or "@"
+                    // biswajit.mgla -> Biswajit
+                    const extractedName = email.split(/[.@]/)[0];
+                    const formattedName = extractedName.charAt(0).toUpperCase() + extractedName.slice(1);
+
+                    const mockUser = {
+                        id: Math.random().toString(36).substr(2, 9),
+                        name: formattedName, // This now uses your email name!
+                        email: email,
+                        photo: `https://api.dicebear.com/7.x/avataaars/svg?seed=${extractedName}`,
+                        isAdmin: email === ADMIN_EMAIL
+                    };
+                    onLogin(mockUser);
+                }
+            };
+
+            return (
+                <div className="flex flex-col items-center justify-center min-h-[80vh] text-center px-4 animate-fade-in">
+                    <div className="mb-10 w-32 h-32 bg-[#f2ca52] rounded-3xl shadow-xl flex items-center justify-center">
+                        <Package className="w-16 h-16 text-black" />
+                    </div>
+                    <h1 className="text-6xl font-black text-gray-900 mb-2 tracking-tighter">GrabGo</h1>
+                    <p className="text-xl font-bold text-gray-500 mb-12 max-w-sm leading-relaxed uppercase tracking-tight">Quick Pickup & Dropping Service</p>
+                    <div className="flex flex-col space-y-4 w-full max-w-xs">
+                        <button onClick={handleGoogleSignIn} className="flex items-center justify-center space-x-3 bg-[#f2ca52] text-black py-4 px-6 rounded-2xl shadow-lg font-bold hover:bg-black hover:text-[#f2ca52] transition-all">
+                            <img src="https://www.google.com/favicon.ico" className="w-5 h-5" />
+                            <span>Sign in with Google</span>
+                        </button>
+                        <button onClick={() => onLogin({ id: "admin-123", name: "Admin", email: ADMIN_EMAIL, isAdmin: true })} className="text-[10px] text-gray-300 hover:text-gray-500 transition-colors mt-12 uppercase tracking-widest font-bold">Administrator Access</button>
+                    </div>
                 </div>
-            </div>
-        );
+            );
+        };
 
         const DashboardView = ({ user, onSelectService }) => (
             <div className="space-y-8 animate-fade-in">
