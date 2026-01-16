@@ -28,9 +28,9 @@
             <p class="text-[10px] font-extrabold text-red-500 uppercase mt-2 tracking-[0.3em]">Weight Below 1KG Always</p>
         </div>
         
-        <button onclick="showDashboard()" class="w-full max-w-xs bg-white border border-gray-200 py-4 rounded-2xl shadow-sm flex items-center justify-center gap-3 active:scale-95 transition-all font-bold text-gray-700 hover:bg-gray-50">
+        <button onclick="simulateGoogleSignIn()" class="w-full max-w-xs bg-white border border-gray-200 py-4 rounded-2xl shadow-sm flex items-center justify-center gap-3 active:scale-95 transition-all font-bold text-gray-700 hover:bg-gray-50">
             <img src="https://www.google.com/favicon.ico" class="w-5 h-5" />
-            <span>Sign in with Google</span>
+            <span id="login-text">Sign in with Google</span>
         </button>
         
         <p class="mt-16 text-[10px] text-gray-400 font-extrabold uppercase tracking-widest">Shillong City Service</p>
@@ -44,52 +44,11 @@
                     <span class="text-xl font-extrabold tracking-tight">GrabGo</span>
                 </div>
                 <div onclick="location.reload()" class="w-10 h-10 rounded-full border-2 border-yellow-primary overflow-hidden cursor-pointer">
-                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="User">
+                    <img id="user-avatar" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="User">
                 </div>
             </div>
         </nav>
 
         <main class="max-w-xl mx-auto px-6 pt-10 animate-subtle">
             <header class="mb-10 text-left">
-                <p class="text-xs font-extrabold text-gray-400 uppercase tracking-widest mb-1">Live: Shillong</p>
-                <h2 class="text-4xl font-extrabold text-gray-900 tracking-tight">Kumno, <span class="text-gray-400 font-medium">Friend!</span></h2>
-            </header>
-
-            <div class="grid-container mb-12">
-                <div onclick="showOrder('Medicines', '☕')" class="bg-blue-50/50 p-6 rounded-[2.5rem] border border-blue-100 hover:border-blue-300 transition-all cursor-pointer card-shadow">
-                    <div class="bg-white w-12 h-12 rounded-xl flex items-center justify-center text-2xl shadow-sm mb-4">☕</div>
-                    <h3 class="text-lg font-extrabold text-gray-900 leading-tight">Medicines</h3>
-                    <p class="text-[10px] font-bold text-blue-400 mt-2 uppercase tracking-widest">Select →</p>
-                </div>
-
-                <div onclick="showOrder('Household Items', '🏡')" class="bg-emerald-50/50 p-6 rounded-[2.5rem] border border-emerald-100 hover:border-emerald-300 transition-all cursor-pointer card-shadow">
-                    <div class="bg-white w-12 h-12 rounded-xl flex items-center justify-center text-2xl shadow-sm mb-4">🏡</div>
-                    <h3 class="text-lg font-extrabold text-gray-900 leading-tight">Household</h3>
-                    <p class="text-[10px] font-bold text-emerald-400 mt-2 uppercase tracking-widest">Select →</p>
-                </div>
-
-                <div onclick="showOrder('Documents & Files', '📄')" class="bg-rose-50/50 p-6 rounded-[2.5rem] border border-rose-100 hover:border-rose-300 transition-all cursor-pointer card-shadow">
-                    <div class="bg-white w-12 h-12 rounded-xl flex items-center justify-center text-2xl shadow-sm mb-4">📄</div>
-                    <h3 class="text-lg font-extrabold text-gray-900 leading-tight">Documents</h3>
-                    <p class="text-[10px] font-bold text-rose-400 mt-2 uppercase tracking-widest">Select →</p>
-                </div>
-
-                <div onclick="showOrder('Others (Custom Fetch)', '🛋')" class="bg-gray-50 p-6 rounded-[2.5rem] border border-gray-200 hover:border-gray-400 transition-all cursor-pointer card-shadow">
-                    <div class="bg-white w-12 h-12 rounded-xl flex items-center justify-center text-2xl shadow-sm mb-4">🛋</div>
-                    <h3 class="text-lg font-extrabold text-gray-900 leading-tight">Others</h3>
-                    <p class="text-[10px] font-bold text-gray-400 mt-2 uppercase tracking-widest">Select →</p>
-                </div>
-            </div>
-
-            <div class="bg-gray-900 rounded-[2.5rem] p-8 text-white relative overflow-hidden shadow-2xl">
-                <div class="relative z-10">
-                    <h3 class="text-xl font-extrabold mb-1 italic">GrabGo Prime</h3>
-                    <p class="text-xs text-gray-400 font-medium">Flat ₹80 Delivery. Coming Soon.</p>
-                </div>
-                <div class="absolute -right-4 -bottom-4 opacity-10 text-8xl font-black italic">GG</div>
-            </div>
-        </main>
-    </div>
-
-    <div id="view-order" class="hidden max-w-xl mx-auto p-6 animate-subtle">
-        <button onclick="showDashboard()" class="mb-8 font-extrabold text-gray-400 text-[10px]
+                <p class="text-xs font-extrabold text-gray-400 uppercase tracking-widest mb-1">Live: Shillong</
