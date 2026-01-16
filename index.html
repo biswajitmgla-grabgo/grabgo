@@ -62,18 +62,28 @@
 <script type="module"> 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import * as LucideIcons from 'lucide-react'; 
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 console.log("GrabGo: Starting application...");
 const rootElement = document.getElementById('root');
 if (!rootElement) {
   throw new Error("Could not find root element to mount to");
 }
+
 const root = ReactDOM.createRoot(rootElement);
 root.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>
 );
+    function App() {
+  // (Your App.tsx code will look like this)
+  return (
+    <div className="bg-white">
+      <h1>GrabGo Shillong</h1>
+      {/* ... the rest of your app ... */}
  </script>
 </body>
 </html>
