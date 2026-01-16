@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>GrabGo | Premium Shillong</title>
+    <title>GrabGo | Premium Delivery</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -16,54 +16,203 @@
         .grid-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
         .loading-spinner { border: 3px solid #f3f3f3; border-top: 3px solid #000; border-radius: 50%; width: 20px; height: 20px; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .logo-img { object-fit: contain; width: 100%; height: 100%; }
+        
+        /* UPDATED: ENLARGED LOGO STYLE */
+        .logo-box { 
+            width: 180px; 
+            height: 180px; 
+            margin-bottom: 2rem;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
+        }
+        .logo-img { width: 100%; height: 100%; object-fit: contain; }
     </style>
 </head>
 <body class="antialiased">
 
     <div id="view-home" class="flex flex-col items-center justify-center min-h-screen p-8 text-center animate-subtle">
-        <div class="w-32 h-32 mb-10 overflow-hidden rounded-3xl shadow-xl">
-            <img src="logo.png" alt="GrabGo Logo" class="logo-img">
+        <div class="logo-box">
+            <img src="https://i.ibb.co/v4mS88m/grabgo-logo.png" onerror="this.src='https://cdn-icons-png.flaticon.com/512/709/709790.png'" alt="GrabGo Logo" class="logo-img">
         </div>
         
-        <h1 class="text-6xl font-extrabold tracking-tighter mb-4 text-gray-900 italic">GrabGo</h1>
-        <div class="mb-16">
+        <h1 class="text-5xl font-extrabold tracking-tighter mb-4 text-gray-900 italic">GrabGo</h1>
+        <div class="mb-12">
             <p class="text-lg font-bold text-gray-700 uppercase tracking-tight">Quick Documents & Domestic Delivery</p>
-            <p class="text-[10px] font-extrabold text-red-500 uppercase mt-2 tracking-[0.3em]">WEIGHT BELOW 1KG ALWAYS</p>
+            <p class="text-[10px] font-extrabold text-red-600 uppercase mt-2 tracking-[0.3em]">WEIGHT BELOW 1KG ALWAYS</p>
         </div>
         
-        <button id="google-btn" onclick="startLogin()" class="w-full max-w-xs bg-white border border-gray-200 py-4 rounded-2xl shadow-sm flex items-center justify-center gap-3 active:scale-95 transition-all font-bold text-gray-700 hover:bg-gray-50 relative overflow-hidden">
+        <button onclick="startLogin()" class="w-full max-w-xs bg-white border-2 border-gray-100 py-4 rounded-2xl shadow-sm flex items-center justify-center gap-3 active:scale-95 transition-all font-bold text-gray-700 hover:border-yellow-400">
             <div id="btn-content" class="flex items-center gap-3">
                 <img src="https://www.google.com/favicon.ico" class="w-5 h-5" />
                 <span>Sign in with Google</span>
             </div>
             <div id="btn-loader" class="hidden loading-spinner"></div>
         </button>
-        
-        <p class="mt-16 text-[10px] text-gray-400 font-extrabold uppercase tracking-widest">Shillong City Service</p>
     </div>
 
     <div id="view-dashboard" class="hidden min-h-screen bg-[#fafafa]">
-        <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 px-6 py-4">
+        <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 px-6 py-3">
             <div class="max-w-xl mx-auto flex justify-between items-center">
                 <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 overflow-hidden rounded-lg">
-                        <img src="logo.png" alt="GG" class="logo-img">
-                    </div>
-                    <span class="text-xl font-extrabold tracking-tight">GrabGo</span>
+                    <img src="https://i.ibb.co/v4mS88m/grabgo-logo.png" onerror="this.src='https://cdn-icons-png.flaticon.com/512/709/709790.png'" class="w-8 h-8 object-contain">
+                    <span class="text-xl font-black italic tracking-tighter">GrabGo</span>
                 </div>
-                <div onclick="location.reload()" class="w-9 h-9 rounded-full border-2 border-[#f2ca52] overflow-hidden cursor-pointer">
-                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="User">
+                <div class="w-10 h-10 rounded-full border-2 border-yellow-400 overflow-hidden bg-gray-200">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Shillong" alt="User">
                 </div>
             </div>
         </nav>
 
-        <main class="max-w-xl mx-auto px-6 pt-10 animate-subtle">
-            <header class="mb-10 text-left">
-                <p class="text-xs font-extrabold text-gray-400 uppercase tracking-widest mb-1">Live: Shillong</p>
-                <h2 class="text-4xl font-extrabold text-gray-900 tracking-tight">Kumno, <span class="text-gray-400 font-medium">Friend!</span></h2>
+        <main class="max-w-xl mx-auto px-6 pt-8 animate-subtle">
+            <header class="mb-8">
+                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] mb-1">Service in Shillong</p>
+                <h2 class="text-3xl font-extrabold text-gray-900">Kumno, <span class="text-gray-400 font-medium">Friend!</span></h2>
             </header>
 
-            <div class="grid-container mb-12">
-                <div onclick="showOrder('Medicines', '☕')" class="bg-white p-6 rounded-[2.5rem] border border-gray-100 hover:border-[#f2ca52] transition-all cursor-pointer card-shadow group">
-                    <div class="bg-blue-5
+            <div class="grid-container mb-10">
+                <div onclick="showOrder('Medicines', '💊')" class="bg-white p-6 rounded-[2rem] border border-gray-100 hover:border-yellow-400 transition-all cursor-pointer card-shadow group">
+                    <div class="bg-blue-50 w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">💊</div>
+                    <h3 class="text-lg font-extrabold text-gray-900">Medicines</h3>
+                    <p class="text-[10px] font-bold text-gray-400 mt-2 uppercase">Book Now →</p>
+                </div>
+
+                <div onclick="showOrder('Household Items', '🏡')" class="bg-white p-6 rounded-[2rem] border border-gray-100 hover:border-yellow-400 transition-all cursor-pointer card-shadow group">
+                    <div class="bg-emerald-50 w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">🏡</div>
+                    <h3 class="text-lg font-extrabold text-gray-900">Household</h3>
+                    <p class="text-[10px] font-bold text-gray-400 mt-2 uppercase">Book Now →</p>
+                </div>
+
+                <div onclick="showOrder('Documents', '📄')" class="bg-white p-6 rounded-[2rem] border border-gray-100 hover:border-yellow-400 transition-all cursor-pointer card-shadow group">
+                    <div class="bg-purple-50 w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">📄</div>
+                    <h3 class="text-lg font-extrabold text-gray-900">Documents</h3>
+                    <p class="text-[10px] font-bold text-gray-400 mt-2 uppercase">Book Now →</p>
+                </div>
+
+                <div onclick="showOrder('Scooty Service', '🛵')" class="bg-white p-6 rounded-[2rem] border border-gray-100 hover:border-yellow-400 transition-all cursor-pointer card-shadow group">
+                    <div class="bg-orange-50 w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">🛵</div>
+                    <h3 class="text-lg font-extrabold text-gray-900">Scooty Taxi</h3>
+                    <p class="text-[10px] font-bold text-gray-400 mt-2 uppercase">Book Now →</p>
+                </div>
+            </div>
+
+            <div class="bg-gray-900 rounded-[2rem] p-8 text-white relative overflow-hidden shadow-xl">
+                <h3 class="text-xl font-bold mb-1 italic">GrabGo Prime</h3>
+                <p class="text-xs text-gray-400">Priority pickup & flat rates. Coming soon.</p>
+                <div class="absolute -right-4 -bottom-4 opacity-10 text-7xl font-black italic">GG</div>
+            </div>
+        </main>
+    </div>
+
+    <div id="view-order" class="hidden max-w-xl mx-auto p-6 animate-subtle">
+        <button onclick="showDashboard()" class="mb-6 font-bold text-gray-400 text-xs uppercase tracking-widest">← Back</button>
+        <div class="bg-white rounded-[2.5rem] shadow-2xl border border-gray-50 overflow-hidden">
+            <div class="p-8 bg-black text-white flex justify-between items-end">
+                <div>
+                    <h3 id="order-title" class="text-2xl font-black italic">Service</h3>
+                    <p id="order-type-label" class="text-yellow-400 text-[10px] font-bold uppercase mt-1">Normal Delivery</p>
+                </div>
+                <span id="display-price" class="text-3xl font-black italic text-yellow-400">₹100</span>
+            </div>
+            
+            <form onsubmit="handleFormSubmit(event)" class="p-8 space-y-5">
+                <div class="flex gap-2 p-1 bg-gray-100 rounded-2xl">
+                    <button type="button" id="btn-normal" onclick="setDelivery('Normal')" class="flex-1 py-3 rounded-xl text-xs font-bold transition-all bg-white shadow-sm">NORMAL</button>
+                    <button type="button" id="btn-express" onclick="setDelivery('Express')" class="flex-1 py-3 rounded-xl text-xs font-bold transition-all text-gray-500">URGENCY</button>
+                </div>
+                
+                <input type="tel" required placeholder="Mobile Number" class="w-full p-4 rounded-xl bg-gray-50 border border-transparent focus:bg-white focus:border-yellow-400 outline-none font-bold text-sm transition-all">
+                <input type="text" id="dynamic-item" required placeholder="What are we fetching?" class="w-full p-4 rounded-xl bg-gray-50 border border-transparent focus:bg-white focus:border-yellow-400 outline-none font-bold text-sm transition-all">
+                <input type="text" id="dynamic-pickup" required placeholder="Pickup Location" class="w-full p-4 rounded-xl bg-gray-50 border border-transparent focus:bg-white focus:border-yellow-400 outline-none font-bold text-sm transition-all">
+                <input type="text" required placeholder="Drop Destination" class="w-full p-4 rounded-xl bg-gray-50 border border-transparent focus:bg-white focus:border-yellow-400 outline-none font-bold text-sm transition-all">
+                
+                <div class="p-4 bg-red-50 rounded-2xl border border-red-100">
+                    <p id="disclaimer" class="text-[9px] font-black text-red-800 uppercase text-center leading-tight">
+                        Note: Weight must be below 1 KG. No prohibited items.
+                    </p>
+                </div>
+
+                <button type="submit" class="yellow-primary w-full py-5 rounded-2xl font-black text-sm uppercase tracking-widest shadow-lg active:scale-95 transition-all">
+                    Review Payment
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div id="view-payment" class="hidden max-w-xl mx-auto p-6 animate-subtle text-center">
+        <div class="bg-white rounded-[3rem] p-10 shadow-2xl border border-gray-50">
+            <h3 class="text-2xl font-black mb-2 italic">Select Payment</h3>
+            <p class="text-xs text-gray-400 font-bold mb-8 uppercase tracking-widest">Amount to pay: ₹<span class="pay-amt">100</span></p>
+            
+            <div class="space-y-4 mb-10">
+                <button onclick="finishOrder('UPI')" class="w-full p-6 border-2 border-gray-100 rounded-3xl flex items-center justify-between hover:border-yellow-400 transition-all group">
+                    <div class="flex items-center gap-4 text-left">
+                        <div class="text-2xl">📱</div>
+                        <div><p class="font-black text-sm uppercase tracking-tight">UPI Payment</p><p class="text-[10px] text-gray-400">GPay, PhonePe, Paytm</p></div>
+                    </div>
+                    <span class="font-black text-gray-300 group-hover:text-yellow-500">→</span>
+                </button>
+                <button onclick="finishOrder('Cash')" class="w-full p-6 border-2 border-gray-100 rounded-3xl flex items-center justify-between hover:border-yellow-400 transition-all group">
+                    <div class="flex items-center gap-4 text-left">
+                        <div class="text-2xl">💵</div>
+                        <div><p class="font-black text-sm uppercase tracking-tight">Cash on Delivery</p><p class="text-[10px] text-gray-400">Pay when rider arrives</p></div>
+                    </div>
+                    <span class="font-black text-gray-300 group-hover:text-yellow-500">→</span>
+                </button>
+            </div>
+            <button onclick="showDashboard()" class="text-[10px] font-black text-gray-300 uppercase tracking-[0.2em]">Go Back</button>
+        </div>
+    </div>
+
+    <script>
+        let currentPrice = 100;
+
+        function startLogin() {
+            const content = document.getElementById('btn-content');
+            const loader = document.getElementById('btn-loader');
+            content.classList.add('hidden');
+            loader.classList.remove('hidden');
+            setTimeout(() => { showDashboard(); content.classList.remove('hidden'); loader.classList.add('hidden'); }, 1500);
+        }
+
+        function showDashboard() { hideAll(); document.getElementById('view-dashboard').classList.remove('hidden'); }
+        
+        function showOrder(name, icon) {
+            hideAll();
+            document.getElementById('view-order').classList.remove('hidden');
+            document.getElementById('order-title').innerText = name;
+            
+            const item = document.getElementById('dynamic-item');
+            const pickup = document.getElementById('dynamic-pickup');
+            const disclaimer = document.getElementById('disclaimer');
+
+            if (name === 'Scooty Service') {
+                item.placeholder = "Number of Passengers (Max 1)";
+                pickup.placeholder = "Your Pickup Location";
+                disclaimer.innerText = "Note: Standard safety rules apply. Rider must wear a helmet.";
+            } else {
+                item.placeholder = "What are we fetching?";
+                pickup.placeholder = "Pickup Address";
+                disclaimer.innerText = "Note: Weight must be below 1 KG. Prohibited items (Liquor/Weapons) not allowed.";
+            }
+            setDelivery('Normal');
+        }
+
+        function setDelivery(type) {
+            const btnN = document.getElementById('btn-normal'), btnE = document.getElementById('btn-express'), disp = document.getElementById('display-price'), lbl = document.getElementById('order-type-label'), payAmt = document.querySelectorAll('.pay-amt');
+            if (type === 'Normal') { currentPrice = 100; btnN.className = "flex-1 py-3 rounded-xl text-xs font-bold bg-white shadow-sm text-black"; btnE.className = "flex-1 py-3 rounded-xl text-xs font-bold text-gray-400"; lbl.innerText = "Normal Delivery"; }
+            else { currentPrice = 180; btnE.className = "flex-1 py-3 rounded-xl text-xs font-bold bg-white shadow-sm text-black"; btnN.className = "flex-1 py-3 rounded-xl text-xs font-bold text-gray-400"; lbl.innerText = "Urgency Delivery"; }
+            disp.innerText = "₹" + currentPrice; payAmt.forEach(el => el.innerText = currentPrice);
+        }
+
+        function handleFormSubmit(e) { e.preventDefault(); hideAll(); document.getElementById('view-payment').classList.remove('hidden'); }
+        function finishOrder(m) { alert(`GrabGo: Order placed via ${m}! A rider will contact you soon.`); location.reload(); }
+        
+        function hideAll() { 
+            document.getElementById('view-home').classList.add('hidden');
+            document.getElementById('view-dashboard').classList.add('hidden');
+            document.getElementById('view-order').classList.add('hidden');
+            document.getElementById('view-payment').classList.add('hidden');
+            window.scrollTo(0,0); 
+        }
+    </script>
+</body>
+</html>
