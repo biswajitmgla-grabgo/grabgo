@@ -9,24 +9,87 @@
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #ffffff; color: #111827; }
         .yellow-primary { background-color: #f2ca52; }
-        .text-yellow-primary { color: #f2ca52; }
         .animate-subtle { animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .hidden { display: none !important; }
         .card-shadow { box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05); }
         .input-field { background: #f9fafb; border: 1px solid #f3f4f6; transition: all 0.2s; }
-        .input-field:focus { border-color: #f2ca52; background: #fff; ring: 2px; ring-color: #f2ca52; }
+        .input-field:focus { border-color: #f2ca52; background: #fff; outline: none; ring: 2px; }
         .grid-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-        @media (max-width: 640px) { .grid-container { gap: 12px; } }
     </style>
 </head>
 <body class="antialiased">
 
     <div id="view-home" class="flex flex-col items-center justify-center min-h-screen p-8 text-center animate-subtle">
-        <div class="yellow-primary w-24 h-24 rounded-[2rem] mb-12 shadow-2xl shadow-yellow-200 flex items-center justify-center text-4xl">📦</div>
+        <div class="yellow-primary w-24 h-24 rounded-[2.5rem] mb-12 shadow-2xl shadow-yellow-200 flex items-center justify-center text-4xl">📦</div>
         <h1 class="text-6xl font-extrabold tracking-tighter mb-4 text-gray-900 italic">GrabGo</h1>
         <div class="mb-16">
             <p class="text-lg font-bold text-gray-700 uppercase tracking-tight">Quick Documents & Domestic Delivery</p>
             <p class="text-[10px] font-extrabold text-red-500 uppercase mt-2 tracking-[0.3em]">Weight Below 1KG Always</p>
         </div>
-        <button onclick="showDashboard()" class="yellow-primary w-full max-w-xs py-5 rounded-2xl shadow-lg flex items-center justify-center gap-4 active:scale-95 transition-all font-extrabold text-black uppercase tracking-
+        
+        <button onclick="showDashboard()" class="w-full max-w-xs bg-white border border-gray-200 py-4 rounded-2xl shadow-sm flex items-center justify-center gap-3 active:scale-95 transition-all font-bold text-gray-700 hover:bg-gray-50">
+            <img src="https://www.google.com/favicon.ico" class="w-5 h-5" />
+            <span>Sign in with Google</span>
+        </button>
+        
+        <p class="mt-16 text-[10px] text-gray-400 font-extrabold uppercase tracking-widest">Shillong City Service</p>
+    </div>
+
+    <div id="view-dashboard" class="hidden min-h-screen">
+        <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 px-6 py-4">
+            <div class="max-w-xl mx-auto flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <div class="yellow-primary px-2 py-1 rounded-lg font-extrabold italic text-sm">GG</div>
+                    <span class="text-xl font-extrabold tracking-tight">GrabGo</span>
+                </div>
+                <div onclick="location.reload()" class="w-10 h-10 rounded-full border-2 border-yellow-primary overflow-hidden cursor-pointer">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="User">
+                </div>
+            </div>
+        </nav>
+
+        <main class="max-w-xl mx-auto px-6 pt-10 animate-subtle">
+            <header class="mb-10 text-left">
+                <p class="text-xs font-extrabold text-gray-400 uppercase tracking-widest mb-1">Live: Shillong</p>
+                <h2 class="text-4xl font-extrabold text-gray-900 tracking-tight">Kumno, <span class="text-gray-400 font-medium">Friend!</span></h2>
+            </header>
+
+            <div class="grid-container mb-12">
+                <div onclick="showOrder('Medicines', '☕')" class="bg-blue-50/50 p-6 rounded-[2.5rem] border border-blue-100 hover:border-blue-300 transition-all cursor-pointer card-shadow">
+                    <div class="bg-white w-12 h-12 rounded-xl flex items-center justify-center text-2xl shadow-sm mb-4">☕</div>
+                    <h3 class="text-lg font-extrabold text-gray-900 leading-tight">Medicines</h3>
+                    <p class="text-[10px] font-bold text-blue-400 mt-2 uppercase tracking-widest">Select →</p>
+                </div>
+
+                <div onclick="showOrder('Household Items', '🏡')" class="bg-emerald-50/50 p-6 rounded-[2.5rem] border border-emerald-100 hover:border-emerald-300 transition-all cursor-pointer card-shadow">
+                    <div class="bg-white w-12 h-12 rounded-xl flex items-center justify-center text-2xl shadow-sm mb-4">🏡</div>
+                    <h3 class="text-lg font-extrabold text-gray-900 leading-tight">Household</h3>
+                    <p class="text-[10px] font-bold text-emerald-400 mt-2 uppercase tracking-widest">Select →</p>
+                </div>
+
+                <div onclick="showOrder('Documents & Files', '📄')" class="bg-rose-50/50 p-6 rounded-[2.5rem] border border-rose-100 hover:border-rose-300 transition-all cursor-pointer card-shadow">
+                    <div class="bg-white w-12 h-12 rounded-xl flex items-center justify-center text-2xl shadow-sm mb-4">📄</div>
+                    <h3 class="text-lg font-extrabold text-gray-900 leading-tight">Documents</h3>
+                    <p class="text-[10px] font-bold text-rose-400 mt-2 uppercase tracking-widest">Select →</p>
+                </div>
+
+                <div onclick="showOrder('Others (Custom Fetch)', '🛋')" class="bg-gray-50 p-6 rounded-[2.5rem] border border-gray-200 hover:border-gray-400 transition-all cursor-pointer card-shadow">
+                    <div class="bg-white w-12 h-12 rounded-xl flex items-center justify-center text-2xl shadow-sm mb-4">🛋</div>
+                    <h3 class="text-lg font-extrabold text-gray-900 leading-tight">Others</h3>
+                    <p class="text-[10px] font-bold text-gray-400 mt-2 uppercase tracking-widest">Select →</p>
+                </div>
+            </div>
+
+            <div class="bg-gray-900 rounded-[2.5rem] p-8 text-white relative overflow-hidden shadow-2xl">
+                <div class="relative z-10">
+                    <h3 class="text-xl font-extrabold mb-1 italic">GrabGo Prime</h3>
+                    <p class="text-xs text-gray-400 font-medium">Flat ₹80 Delivery. Coming Soon.</p>
+                </div>
+                <div class="absolute -right-4 -bottom-4 opacity-10 text-8xl font-black italic">GG</div>
+            </div>
+        </main>
+    </div>
+
+    <div id="view-order" class="hidden max-w-xl mx-auto p-6 animate-subtle">
+        <button onclick="showDashboard()" class="mb-8 font-extrabold text-gray-400 text-[10px]
