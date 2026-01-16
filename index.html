@@ -6,12 +6,11 @@
     <title>GrabGo - Shillong Instant Delivery</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #fcfcfc; }
-        .animate-fade-in { animation: fadeIn 0.3s ease-out; }
+        .animate-fade { animation: fadeIn 0.3s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
     </style>
     <script type="importmap">
     {
@@ -27,13 +26,11 @@
     <div id="root"></div>
 
     <script type="text/babel" data-type="module">
-        import React, { useState, useEffect } from 'react';
+        import React, { useState } from 'react';
         import ReactDOM from 'react-dom/client';
         import * as Lucide from 'lucide-react';
 
-        const { Package, Pill, Home, FileText, Settings, LayoutDashboard, History, LogOut, MapPin, ChevronRight, ArrowLeft, Send, CreditCard, ShieldAlert, CheckCircle2, AlertTriangle } = Lucide;
-
-        const ADMIN_EMAIL = "admin@grabgo.in";
+        const { Package, Pill, Home, FileText, Settings, LayoutDashboard, History, LogOut, MapPin, ChevronRight, ArrowLeft, Send, ShieldAlert, AlertTriangle } = Lucide;
 
         const SERVICE_CATEGORIES = [
           { id: 'medicines', name: 'Medicines', icon: <Pill size={28} />, bgColor: 'bg-rose-50', color: 'text-rose-600' },
@@ -46,22 +43,27 @@
             const [user, setUser] = useState(null);
             const [currentView, setCurrentView] = useState('home');
             const [selectedService, setSelectedService] = useState(null);
-            const [orders, setOrders] = useState([]);
 
-            // --- Views ---
+            const handleLogin = () => {
+                const email = prompt("Enter your email:", "biswajit.mgla@gmail.com");
+                if (email) {
+                    const namePart = email.split(/[.@]/)[0];
+                    const formattedName = namePart.charAt(0).toUpperCase() + namePart.slice(1);
+                    setUser({ name: formattedName, email: email });
+                    setCurrentView('dashboard');
+                }
+            };
 
-            const HomeView = () => {
-                const handleLogin = () => {
-                    const email = prompt("Enter your Gmail:", "biswajit.mgla@gmail.com");
-                    if (email) {
-                        const name = email.split(/[.@]/)[0];
-                        setUser({ name: name.charAt(0).toUpperCase() + name.slice(1), email, isAdmin: email === ADMIN_EMAIL });
-                        setCurrentView('dashboard');
-                    }
-                };
+            const Dashboard = () => (
+                <div className="p-4 space-y-6 animate-fade">
+                    <div className="flex justify-between items-center mb-8">
+                        <div>
+                            <h2 className="text-3xl font-black tracking-tight text-gray-900">Kumno, {user.name}!</h2>
+                            <p className="text-gray-500 font-medium">What should we grab today?</p>
+                        </div>
+                        <div className="bg-[#f2ca52] p-3 rounded-2xl shadow-lg"><Package /></div>
+                    </div>
 
-                return (
-                    <div className="flex flex-col items-center justify-center min-h-[90vh] text-center px-6 animate-fade-in">
-                        <div className="bg-[#f2ca52] p-5 rounded-[2rem] shadow-2xl mb-8"><Package size={50} /></div>
-                        <h1 className="text-6xl font-black tracking-tighter mb-2 italic">GrabGo</h1>
-                        <p className="text-gray-400 font-bold uppercase tracking-[0.3em] text-xs mb-12">Shillong Quick
+                    <div className="grid grid-cols-1 gap-4">
+                        {SERVICE_CATEGORIES.map(s => (
+                            <button key={s.id} onClick={() => { setSelectedService(s.id); setCurrentView('order-form'); }} className={`${s.bgColor} p
