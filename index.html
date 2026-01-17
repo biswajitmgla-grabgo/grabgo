@@ -3,94 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>GrabGo | Shillong</title>
+    <title>GrabGo | Professional Logistics</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #ffffff; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #ffffff; color: #111827; }
         .hidden { display: none !important; }
-        .service-card { border-radius: 24px; padding: 25px 15px; text-align: center; transition: all 0.2s; cursor: pointer; }
-        .service-card:active { transform: scale(0.96); }
         
-        /* Distinct Service Colors */
-        .bg-meds { background-color: #f0f7ff; color: #1d4ed8; border: 1px solid #dbeafe; }
-        .bg-house { background-color: #f0fdf4; color: #15803d; border: 1px solid #dcfce7; }
-        .bg-docs { background-color: #faf5ff; color: #7e22ce; border: 1px solid #f3e8ff; }
-        .bg-taxi { background-color: #fffaf5; color: #c2410c; border: 1px solid #ffedd5; }
+        /* Service Cards: Distinct but Professional */
+        .card { border-radius: 28px; padding: 30px 15px; text-align: center; transition: all 0.2s ease; cursor: pointer; border: 1px solid rgba(0,0,0,0.03); }
+        .card:active { transform: scale(0.95); }
+        
+        .c-blue { background-color: #f0f7ff; color: #1d4ed8; }
+        .c-green { background-color: #f0fdf4; color: #15803d; }
+        .c-purple { background-color: #faf5ff; color: #7e22ce; }
+        .c-orange { background-color: #fffaf5; color: #c2410c; }
+        
+        .g-icon { font-size: 40px !important; margin-bottom: 12px; }
     </style>
 </head>
-<body>
+<body class="antialiased">
 
-    <div id="view-login" class="flex flex-col items-center justify-center min-h-screen px-8">
-        <div class="w-24 h-24 mb-6 bg-gray-50 rounded-3xl flex items-center justify-center">
-            <img src="FinalLogo.png" class="w-16" onerror="this.src='https://cdn-icons-png.flaticon.com/512/709/709790.png'">
+    <div id="view-login" class="flex flex-col items-center justify-center min-h-screen p-8 text-center">
+        <h1 class="text-4xl font-800 italic tracking-tighter mb-1">GRABGO</h1>
+        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.4em] mb-12">Shillong Logistics</p>
+        
+        <div class="w-full max-w-xs space-y-3">
+            <input type="email" id="email-input" placeholder="Enter Gmail ID" class="w-full p-4 bg-gray-50 rounded-2xl outline-none focus:border-black border border-transparent text-sm text-center">
+            <button onclick="handleSimpleLogin()" class="w-full bg-black text-white py-4 rounded-2xl font-bold shadow-2xl active:scale-95 transition-all">
+                Continue to Dashboard
+            </button>
         </div>
-        <h1 class="text-3xl font-800 italic tracking-tighter mb-1">GRABGO</h1>
-        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em] mb-12">Logistics Redefined</p>
-
-        <div id="g_id_onload"
-             data-client_id="YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com"
-             data-callback="handleCredentialResponse"
-             data-auto_prompt="false">
-        </div>
-        <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="filled_black" data-size="large" data-logo_alignment="left"></div>
     </div>
 
     <div id="view-dash" class="hidden min-h-screen">
         <nav class="p-6 flex justify-between items-center sticky top-0 bg-white/80 backdrop-blur-md z-10">
             <div>
                 <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Kumno!</p>
-                <h2 id="user-name" class="text-xl font-800 italic tracking-tighter uppercase">User</h2>
+                <h2 id="user-display" class="text-xl font-800 italic tracking-tighter uppercase">User</h2>
             </div>
-            
-            <button id="orders-btn" onclick="showOrders()" class="hidden bg-indigo-600 text-white text-[10px] px-5 py-2.5 rounded-full font-bold shadow-lg shadow-indigo-100">
+            <button id="admin-orders-btn" onclick="showOrders()" class="hidden bg-indigo-600 text-white text-[10px] px-5 py-2.5 rounded-full font-bold shadow-lg shadow-indigo-100">
                 ORDERS
             </button>
         </nav>
 
-        <main class="px-6 pb-10 max-w-md mx-auto">
-            <h3 class="text-lg font-800 tracking-tighter mb-6 mt-4">Select Service</h3>
-            
+        <main class="max-w-xl mx-auto px-6 pb-12">
+            <h3 class="text-lg font-800 tracking-tighter mb-6">Our Services</h3>
             <div class="grid grid-cols-2 gap-4">
-                <div class="service-card bg-meds">
-                    <span class="material-icons-outlined text-4xl mb-2">medical_services</span>
+                <div class="card c-blue">
+                    <span class="material-icons-outlined g-icon">medical_services</span>
                     <p class="font-bold text-sm">Medicines</p>
                 </div>
-                <div class="service-card bg-house">
-                    <span class="material-icons-outlined text-4xl mb-2">inventory_2</span>
+                <div class="card c-green">
+                    <span class="material-icons-outlined g-icon">inventory_2</span>
                     <p class="font-bold text-sm">Household</p>
                 </div>
-                <div class="service-card bg-docs">
-                    <span class="material-icons-outlined text-4xl mb-2">assignment</span>
+                <div class="card c-purple">
+                    <span class="material-icons-outlined g-icon">assignment</span>
                     <p class="font-bold text-sm">Documents</p>
                 </div>
-                <div class="service-card bg-taxi">
-                    <span class="material-icons-outlined text-4xl mb-2">moped</span>
+                <div class="card c-orange">
+                    <span class="material-icons-outlined g-icon">moped</span>
                     <p class="font-bold text-sm">Scooty Taxi</p>
                 </div>
             </div>
 
-            <div class="mt-8 bg-black p-8 rounded-[32px] text-white">
+            <div class="mt-8 bg-gray-900 p-8 rounded-[32px] text-white">
                 <h4 class="text-lg font-800 italic mb-1">GrabGo Prime</h4>
-                <p class="text-xs text-gray-400">Flat ₹80 across Shillong</p>
+                <p class="text-xs text-gray-400 font-medium">Flat ₹80 delivery across Shillong</p>
             </div>
         </main>
     </div>
 
     <div id="view-orders" class="hidden min-h-screen bg-gray-50 p-6">
-        <button onclick="closeOrders()" class="mb-6 text-gray-400"><span class="material-icons-outlined">arrow_back</span></button>
-        <h2 class="text-3xl font-800 tracking-tighter mb-8 italic">Incoming Orders</h2>
+        <button onclick="hideOrders()" class="mb-6 text-gray-400"><span class="material-icons-outlined">arrow_back</span></button>
+        <h2 class="text-3xl font-800 tracking-tighter mb-8 italic">Order Requests</h2>
         
         <div class="space-y-4">
-            <div class="bg-white p-5 rounded-3xl shadow-sm border border-gray-100 flex justify-between items-center">
-                <div>
-                    <p class="text-[10px] font-bold text-indigo-500 uppercase">#1024</p>
-                    <p class="font-bold text-sm">Medicine Pickup</p>
-                    <p class="text-[10px] text-gray-400">Laitumkhrah to Laban</p>
+            <div class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm">
+                <div class="flex justify-between items-start mb-2">
+                    <p class="font-bold text-sm">Medicine Pickup - Laitumkhrah</p>
+                    <span class="text-[9px] bg-yellow-100 text-yellow-600 px-2 py-1 rounded font-black uppercase">Pending</span>
                 </div>
-                <span class="text-[9px] bg-green-100 text-green-600 px-2 py-1 rounded font-black uppercase">Active</span>
+                <p class="text-[11px] text-gray-400 italic">User: customer@gmail.com</p>
             </div>
         </div>
     </div>
@@ -98,26 +94,26 @@
     <script>
         const ADMIN_EMAIL = "biswajit.mgla@gmail.com";
 
-        // Handle the Google Data
-        function decodeJwtResponse(token) {
-            let base64Url = token.split(".")[1];
-            let base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-            return JSON.parse(atob(base64));
-        }
+        function handleSimpleLogin() {
+            const email = document.getElementById('email-input').value.trim().toLowerCase();
+            
+            if(!email.includes('@')) {
+                alert("Please enter your Gmail ID to continue.");
+                return;
+            }
 
-        function handleCredentialResponse(response) {
-            const user = decodeJwtResponse(response.credential);
-            
-            // 1. Set Name
-            document.getElementById('user-name').innerText = user.given_name || "User";
-            
-            // 2. Switch Views
+            // UI Transitions
             document.getElementById('view-login').classList.add('hidden');
             document.getElementById('view-dash').classList.remove('hidden');
 
-            // 3. Admin Check: Show Orders Button only for you
-            if (user.email === ADMIN_EMAIL) {
-                document.getElementById('orders-btn').classList.remove('hidden');
+            // Set greeting name
+            const userName = email.split('@')[0].toUpperCase();
+            document.getElementById('user-display').innerText = (email === ADMIN_EMAIL) ? "BISWAJIT" : userName;
+
+            // THE ADMIN MAGIC: Check if email matches
+            if (email === ADMIN_EMAIL) {
+                document.getElementById('admin-orders-btn').classList.remove('hidden');
+                console.log("Admin Access Granted");
             }
         }
 
@@ -126,7 +122,7 @@
             document.getElementById('view-orders').classList.remove('hidden');
         }
 
-        function closeOrders() {
+        function hideOrders() {
             document.getElementById('view-orders').classList.add('hidden');
             document.getElementById('view-dash').classList.remove('hidden');
         }
