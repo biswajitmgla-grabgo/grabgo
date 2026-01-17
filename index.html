@@ -3,186 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>GrabGo | Logistics & Delivery</title>
+    <title>GrabGo | Professional Logistics</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #111827; }
-        
-        /* Brand Yellow matched to your new logo */
+        body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #111827; letter-spacing: -0.01em; }
         .yellow-brand { background-color: #F2CA52; }
-        
-        /* Sharp UI Elements */
-        .sharp-card { border-radius: 8px; border: 1px solid #e5e7eb; transition: all 0.2s ease; }
-        .sharp-btn { border-radius: 6px; }
         .hidden { display: none !important; }
-        .grid-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
         
-        /* LOGO CONTAINER - Optimized for the new vertical pin logo */
+        /* LOGO BOX - HOME */
         .logo-container {
-            width: 180px;
-            height: 180px;
+            width: 200px;
+            height: 200px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1.5rem;
-            /* No background here allows the transparent logo to shine */
+            margin-bottom: 2rem;
         }
-        .logo-container img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: contain;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.05));
+        .logo-container img { width: 100%; height: 100%; object-fit: contain; }
+
+        /* NAV LOGO */
+        .nav-logo { height: 28px; width: auto; }
+
+        /* SERVICE CARDS - 70% opacity bg */
+        .service-card { 
+            background-color: rgba(249, 250, 251, 0.7); 
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 1.5rem;
+            transition: all 0.2s ease;
         }
+        .service-card:hover { border-color: #F2CA52; background-color: white; }
+        
+        .g-icon { font-size: 32px !important; color: #111827; margin-bottom: 12px; }
+        .sharp-btn { border-radius: 6px; }
     </style>
 </head>
 <body class="antialiased">
 
     <div id="view-home" class="flex flex-col items-center justify-center min-h-screen p-6 text-center">
         <div class="logo-container">
-            <img src="FinalLogo.png" alt="GrabGo Logo">
+            <img src="FinalLogo.png" alt="GrabGo Logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/709/709790.png'">
         </div>
+        <h1 class="text-4xl font-900 tracking-tighter mb-1 text-gray-900 italic">GRABGO</h1>
+        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em] mb-12">Logistics & Delivery</p>
         
-        <h1 class="text-4xl font-extrabold tracking-tight mb-2 text-gray-900">GRABGO</h1>
-        <p class="text-sm font-medium text-gray-500 uppercase tracking-widest mb-12">Logistics & Delivery</p>
-        
-        <button onclick="startLogin()" class="w-full max-w-xs bg-black text-white py-4 sharp-btn flex items-center justify-center gap-3 active:scale-[0.98] transition-all font-bold shadow-lg">
-            <img src="https://www.google.com/favicon.ico" class="w-4 h-4" />
-            <span>Sign in with Google</span>
+        <button onclick="startLogin()" class="w-full max-w-xs bg-black text-white py-4 sharp-btn flex items-center justify-center gap-3 active:scale-[0.98] transition-all font-bold shadow-xl">
+            <img src="https://www.google.com/favicon.ico" class="w-4 h-4" alt="G"/>
+            <span class="text-sm tracking-tight">Sign in with Google</span>
         </button>
         
-        <p class="mt-20 text-[10px] text-gray-400 font-bold uppercase tracking-widest">Shillong • Meghalaya</p>
+        <p class="mt-24 text-[10px] text-gray-400 font-bold uppercase tracking-widest">Shillong • Meghalaya</p>
     </div>
 
-    <div id="view-dashboard" class="hidden min-h-screen bg-gray-50">
-        <nav class="bg-white border-b border-gray-200 px-6 py-4 sticky top-0 z-50">
+    <div id="view-dashboard" class="hidden min-h-screen bg-white">
+        <nav class="bg-white/80 backdrop-blur-md border-b border-gray-100 px-6 py-4 sticky top-0 z-50">
             <div class="max-w-xl mx-auto flex justify-between items-center">
-                <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 bg-black flex items-center justify-center sharp-btn">
-                        <span class="text-white text-[10px] font-bold italic">GG</span>
-                    </div>
-                    <span class="text-lg font-extrabold tracking-tighter">GRABGO</span>
+                <div class="flex items-center gap-2">
+                    <img src="FinalLogo.png" alt="GrabGo" class="nav-logo">
+                    <span class="text-lg font-900 tracking-tighter italic">GRABGO</span>
                 </div>
-                <div class="w-8 h-8 rounded-full bg-yellow-brand border border-black/10 overflow-hidden">
+                <div class="w-8 h-8 rounded-full border border-gray-200 overflow-hidden">
                     <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="User">
                 </div>
             </div>
         </nav>
 
         <main class="max-w-xl mx-auto px-6 py-8">
-            <h2 class="text-2xl font-extrabold text-gray-900 mb-6">Select Service</h2>
+            <h2 class="text-2xl font-900 text-gray-900 mb-6 tracking-tight">Select Service</h2>
 
-            <div class="grid-container mb-8">
-                <div onclick="showOrder('Medicines')" class="bg-white p-5 sharp-card hover:border-black cursor-pointer shadow-sm">
-                    <div class="text-2xl mb-3">💊</div>
-                    <h3 class="font-bold text-gray-900">Medicines</h3>
-                    <p class="text-[10px] text-gray-400 font-bold mt-1 uppercase">Instant Pickup</p>
+            <div class="grid grid-cols-2 gap-4 mb-8">
+                <div onclick="showOrder('Medicines')" class="service-card cursor-pointer">
+                    <span class="material-icons-outlined g-icon">medical_services</span>
+                    <h3 class="font-bold text-sm">Medicines</h3>
+                    <p class="text-[9px] text-gray-400 font-bold mt-1 uppercase">Instant</p>
                 </div>
-
-                <div onclick="showOrder('Household Items')" class="bg-white p-5 sharp-card hover:border-black cursor-pointer shadow-sm">
-                    <div class="text-2xl mb-3">🏡</div>
-                    <h3 class="font-bold text-gray-900">Household</h3>
-                    <p class="text-[10px] text-gray-400 font-bold mt-1 uppercase">Domestic Box</p>
+                <div onclick="showOrder('Household')" class="service-card cursor-pointer">
+                    <span class="material-icons-outlined g-icon">home_work</span>
+                    <h3 class="font-bold text-sm">Household</h3>
+                    <p class="text-[9px] text-gray-400 font-bold mt-1 uppercase">Domestic</p>
                 </div>
-
-                <div onclick="showOrder('Documents')" class="bg-white p-5 sharp-card hover:border-black cursor-pointer shadow-sm">
-                    <div class="text-2xl mb-3">📄</div>
-                    <h3 class="font-bold text-gray-900">Documents</h3>
-                    <p class="text-[10px] text-gray-400 font-bold mt-1 uppercase">Secure Files</p>
+                <div onclick="showOrder('Documents')" class="service-card cursor-pointer">
+                    <span class="material-icons-outlined g-icon">description</span>
+                    <h3 class="font-bold text-sm">Documents</h3>
+                    <p class="text-[9px] text-gray-400 font-bold mt-1 uppercase">Secure</p>
                 </div>
-
-                <div onclick="showOrder('Scooty Service')" class="bg-white p-5 sharp-card hover:border-black cursor-pointer shadow-sm">
-                    <div class="text-2xl mb-3">🛵</div>
-                    <h3 class="font-bold text-gray-900">Scooty Taxi</h3>
-                    <p class="text-[10px] text-gray-400 font-bold mt-1 uppercase">Ride Delivery</p>
-                </div>
-            </div>
-
-            <div class="bg-black p-6 sharp-card text-white relative overflow-hidden">
-                <h3 class="text-lg font-bold italic">GrabGo Prime</h3>
-                <p class="text-xs text-gray-400 mt-1">Flat ₹80 across Shillong. Join the waitlist.</p>
-            </div>
-        </main>
-    </div>
-
-    <div id="view-order" class="hidden max-w-xl mx-auto p-6">
-        <button onclick="showDashboard()" class="mb-6 font-bold text-gray-400 text-[10px] uppercase tracking-widest">← Return</button>
-        
-        <div class="bg-white sharp-card overflow-hidden shadow-xl border-t-4 border-black">
-            <div class="p-6 border-b border-gray-100 flex justify-between items-center">
-                <h3 id="order-title" class="text-xl font-extrabold uppercase tracking-tight">Service</h3>
-                <span id="display-price" class="text-xl font-extrabold">₹100</span>
-            </div>
-            
-            <form onsubmit="handleFormSubmit(event)" class="p-6 space-y-4">
-                <div class="flex border border-gray-200 p-1 sharp-btn bg-gray-50">
-                    <button type="button" id="btn-n" onclick="setDelivery('Normal')" class="flex-1 py-2 sharp-btn text-[10px] font-black bg-white shadow-sm">NORMAL</button>
-                    <button type="button" id="btn-e" onclick="setDelivery('Express')" class="flex-1 py-2 sharp-btn text-[10px] font-black text-gray-400">URGENT</button>
-                </div>
-                
-                <input type="tel" required placeholder="Phone Number" class="w-full p-4 sharp-btn bg-gray-50 border border-gray-200 text-sm focus:bg-white outline-none">
-                <input type="text" id="inp-item" required placeholder="Item Details" class="w-full p-4 sharp-btn bg-gray-50 border border-gray-200 text-sm focus:bg-white outline-none">
-                <input type="text" id="inp-pick" required placeholder="Pickup Location" class="w-full p-4 sharp-btn bg-gray-50 border border-gray-200 text-sm focus:bg-white outline-none">
-                <input type="text" required placeholder="Drop Destination" class="w-full p-4 sharp-btn bg-gray-50 border border-gray-200 text-sm focus:bg-white outline-none">
-                
-                <div class="p-4 bg-gray-900 text-white sharp-btn">
-                    <p id="note" class="text-[9px] font-bold uppercase text-center tracking-tighter opacity-80">
-                        Weight Limit: 1.0 KG. No Prohibited Goods.
-                    </p>
-                </div>
-
-                <button type="submit" class="yellow-brand w-full py-4 sharp-btn font-extrabold text-sm uppercase shadow-md">
-                    Continue to Payment
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <div id="view-payment" class="hidden max-w-xl mx-auto p-6 text-center">
-        <div class="bg-white sharp-card p-10 shadow-2xl">
-            <h3 class="text-xl font-extrabold mb-8 uppercase">Choose Payment</h3>
-            <div class="space-y-3 mb-10">
-                <button onclick="finishOrder('UPI')" class="w-full p-5 border border-gray-200 sharp-btn flex items-center justify-between hover:bg-gray-50">
-                    <span class="font-bold text-sm">UPI (Digital)</span>
-                    <span class="font-bold">₹<span class="final-amt">100</span></span>
-                </button>
-                <button onclick="finishOrder('Cash')" class="w-full p-5 border border-gray-200 sharp-btn flex items-center justify-between hover:bg-gray-50">
-                    <span class="font-bold text-sm">Cash on Delivery</span>
-                    <span class="font-bold">₹<span class="final-amt">100</span></span>
-                </button>
-            </div>
-            <button onclick="showDashboard()" class="text-[10px] font-bold text-gray-300 uppercase">Cancel Order</button>
-        </div>
-    </div>
-
-    <script>
-        let price = 100;
-        function startLogin() { setTimeout(() => showDashboard(), 800); }
-        function showDashboard() { hideAll(); document.getElementById('view-dashboard').classList.remove('hidden'); }
-        
-        function showOrder(name) {
-            hideAll();
-            document.getElementById('view-order').classList.remove('hidden');
-            document.getElementById('order-title').innerText = name;
-            const item = document.getElementById('inp-item'), pick = document.getElementById('inp-pick'), note = document.getElementById('note');
-            if(name === 'Scooty Service') {
-                item.placeholder = "Number of Passengers"; pick.placeholder = "Where are you?"; note.innerText = "Safety First: Helmet must be worn by both rider and passenger.";
-            } else {
-                item.placeholder = "What are we fetching?"; pick.placeholder = "Pickup Address"; note.innerText = "Weight Limit: 1.0 KG. No Prohibited Goods.";
-            }
-            setDelivery('Normal');
-        }
-
-        function setDelivery(t) {
-            const n = document.getElementById('btn-n'), e = document.getElementById('btn-e'), dp = document.getElementById('display-price'), fa = document.querySelectorAll('.final-amt');
-            if(t === 'Normal') { price = 100; n.className = "flex-1 py-2 sharp-btn text-[10px] font-black bg-white shadow-sm"; e.className = "flex-1 py-2 sharp-btn text-[10px] font-black text-gray-400"; }
-            else { price = 180; e.className = "flex-1 py-2 sharp-btn text-[10px] font-black bg-white shadow-sm"; n.className = "flex-1 py-2 sharp-btn text-[10px] font-black text-gray-400"; }
-            dp.innerText = "₹" + price; fa.forEach(el => el.innerText = price);
-        }
-
-        function handleFormSubmit(e) { e.preventDefault(); hideAll(); document.getElementById('view-payment').classList.remove('hidden'); }
-        function finishOrder(m) { alert(`GrabGo: Order Confirmed via ${m}. Delivering across Shillong.`); location.reload(); }
-        function hideAll() { document.querySelectorAll('body > div').forEach(d => d.classList.add('hidden')); window.scrollTo(0,0); }
-    </script>
-</body>
-</html>
+                <div onclick="showOrder('Scooty Taxi')" class="service-card cursor-pointer">
+                    <span class="material-icons-outlined g-icon">moped</span>
+                    <h
