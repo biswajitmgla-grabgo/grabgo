@@ -33,7 +33,6 @@
         .logo-container { width: 180px; height: 180px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; }
         .logo-container img { width: 100%; height: 100%; object-fit: contain; }
 
-        /* Delivery Toggle Styles */
         .toggle-btn { flex: 1; padding: 12px; font-size: 10px; font-weight: 900; border-radius: 10px; transition: all 0.2s; }
         .active-toggle { background: white; box-shadow: 0 4px 10px rgba(0,0,0,0.05); color: black; }
         .inactive-toggle { color: #9ca3af; }
@@ -54,7 +53,7 @@
         </button>
 
         <button onclick="adminCheck()" class="mt-8 text-[11px] font-bold text-gray-300 uppercase tracking-widest hover:text-gray-900">
-            Admin Portal &bull; Track Orders
+            Admin Portal & bull; Track Orders
         </button>
     </div>
 
@@ -65,7 +64,7 @@
                     <img src="FinalLogo.png" alt="GrabGo" class="h-8 w-auto">
                     <span class="text-xl font-900 tracking-tighter italic">GRABGO</span>
                 </div>
-                <div id="user-profile" class="w-9 h-9 rounded-full bg-gray-100 border border-gray-200 overflow-hidden">
+                <div class="w-9 h-9 rounded-full bg-gray-100 border border-gray-200 overflow-hidden">
                     <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="User">
                 </div>
             </div>
@@ -128,19 +127,19 @@
             
             <form onsubmit="handleFormSubmit(event)" class="space-y-4">
                 <input type="tel" required placeholder="Phone Number" class="w-full p-4 bg-gray-50 rounded-xl outline-none text-sm border border-transparent focus:border-yellow-500 focus:bg-white">
-                <input type="text" required placeholder="Pickup Address" class="w-full p-4 bg-gray-50 rounded-xl outline-none text-sm border border-transparent focus:border-yellow-500 focus:bg-white">
-                <input type="text" required placeholder="Delivery Address" class="w-full p-4 bg-gray-50 rounded-xl outline-none text-sm border border-transparent focus:border-yellow-500 focus:bg-white">
+                <input type="text" id="pickup-input" required placeholder="Pickup Address" class="w-full p-4 bg-gray-50 rounded-xl outline-none text-sm border border-transparent focus:border-yellow-500 focus:bg-white">
+                <input type="text" id="delivery-input" required placeholder="Delivery Address" class="w-full p-4 bg-gray-50 rounded-xl outline-none text-sm border border-transparent focus:border-yellow-500 focus:bg-white">
                 
                 <div class="grid grid-cols-2 gap-3 mt-6">
                     <button type="button" onclick="payWithUPI()" class="border-2 border-black p-4 rounded-xl font-900 text-[10px] uppercase flex items-center justify-center gap-2">
-                        <span class="material-icons-outlined text-sm">account_balance_wallet</span> UPI
+                        <span class="material-icons-outlined text-sm">account_balance_wallet</span> PAY UPI
                     </button>
                     <button type="submit" class="yellow-brand p-4 rounded-xl font-900 text-[10px] uppercase shadow-lg">
                         CASH ON DELIVERY
                     </button>
                 </div>
             </form>
-            <p class="text-center text-[9px] text-gray-400 mt-4 uppercase font-bold">Payments: exeemsales@oksbi</p>
+            <p class="text-center text-[9px] text-gray-400 mt-4 uppercase font-bold tracking-widest">UPI ID: exeemsales@oksbi</p>
         </div>
     </div>
 
@@ -149,10 +148,9 @@
         let isAdmin = false;
 
         function startLogin() {
-            // In a real app, this is where Google Sign-In data is retrieved
-            // For now, we simulate your Gmail identification
-            const userEmail = "exeemsales@gmail.com"; // Simulation
-            if(userEmail === "exeemsales@gmail.com") isAdmin = true;
+            // Admin Check: Simulating detection of your Gmail
+            const loggedInEmail = "exeemsales@gmail.com"; 
+            if(loggedInEmail === "exeemsales@gmail.com") isAdmin = true;
             
             setTimeout(() => {
                 hideAll();
@@ -162,11 +160,30 @@
 
         function adminCheck() {
             if(isAdmin) {
-                alert("Admin Identity Verified (Gmail: exeemsales). Opening Tracking Portal...");
-                // Here we would show the admin tracking view
+                alert("Admin Identity Verified (Gmail: exeemsales). Accessing Portal...");
+                // You can point this to your admin URL or view later
             } else {
-                alert("Please sign in with your Gmail account first.");
+                alert("Please sign in with your authorized Gmail first.");
             }
+        }
+
+        function showOrder(name) {
+            hideAll();
+            document.getElementById('view-order').classList.remove('hidden');
+            document.getElementById('order-title').innerText = name;
+            
+            const pick = document.getElementById('pickup-input');
+            const deli = document.getElementById('delivery-input');
+
+            // Dynamic Placeholder logic for Scooty Taxi
+            if(name === 'Scooty Taxi') {
+                pick.placeholder = "Where are you Now ?";
+                deli.placeholder = "Dropping Address";
+            } else {
+                pick.placeholder = "Pickup Address";
+                deli.placeholder = "Delivery Address";
+            }
+            setPrice(100, 'Normal'); 
         }
 
         function setPrice(amt, type) {
@@ -178,15 +195,8 @@
 
         function payWithUPI() {
             const upiUrl = `upi://pay?pa=exeemsales@oksbi&pn=GrabGo&am=${currentPrice}&cu=INR`;
-            alert(`Opening UPI Payment for ₹${currentPrice} to exeemsales@oksbi...`);
             window.location.href = upiUrl;
-        }
-
-        function showOrder(name) {
-            hideAll();
-            document.getElementById('view-order').classList.remove('hidden');
-            document.getElementById('order-title').innerText = name;
-            setPrice(100, 'Normal'); // Default
+            alert(`Redirecting to UPI apps to pay ₹${currentPrice} to exeemsales@oksbi`);
         }
 
         function hideAll() {
@@ -195,7 +205,7 @@
         }
 
         function showDashboard() { hideAll(); document.getElementById('view-dashboard').classList.remove('hidden'); }
-        function handleFormSubmit(e) { e.preventDefault(); alert("Order Placed (COD). Rider is being assigned."); location.reload(); }
+        function handleFormSubmit(e) { e.preventDefault(); alert("Order Confirmed! Your GrabGo rider is coming."); location.reload(); }
     </script>
 </body>
 </html>
