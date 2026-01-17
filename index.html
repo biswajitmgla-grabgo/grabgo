@@ -2,210 +2,152 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>GrabGo | Professional Logistics</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrabGo | Professional</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #111827; letter-spacing: -0.02em; }
-        .yellow-brand { background-color: #F2CA52; }
-        .hidden { display: none !important; }
-        
-        .font-900 { font-weight: 900; }
-        .font-sleek { font-weight: 300; }
-
-        .service-card { 
-            background-color: rgba(243, 244, 246, 0.7); 
-            border: 1px solid rgba(229, 231, 235, 0.5);
-            border-radius: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 2rem 1rem;
-            transition: all 0.3s ease;
-        }
-        .service-card:hover { background-color: white; border-color: #F2CA52; transform: translateY(-3px); }
-        
-        .g-icon { font-size: 40px !important; color: #111827; margin-bottom: 14px; }
-        .logo-container { width: 180px; height: 180px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; }
-        .logo-container img { width: 100%; height: 100%; object-fit: contain; }
-
-        .toggle-btn { flex: 1; padding: 12px; font-size: 10px; font-weight: 900; border-radius: 10px; transition: all 0.2s; }
-        .active-toggle { background: white; box-shadow: 0 4px 10px rgba(0,0,0,0.05); color: black; }
-        .inactive-toggle { color: #9ca3af; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
+        .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.3); }
+        .hidden { display: none; }
     </style>
 </head>
-<body class="antialiased">
+<body class="text-slate-900">
 
-    <div id="view-home" class="flex flex-col items-center justify-center min-h-screen p-8 text-center">
-        <div class="logo-container">
-            <img src="FinalLogo.png" alt="GrabGo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/709/709790.png'">
-        </div>
-        <h1 class="text-4xl font-900 tracking-tighter mb-1 italic">GRABGO</h1>
-        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.4em] mb-12">Shillong Logistics</p>
+    <nav class="sticky top-0 z-50 glass px-8 py-4 flex justify-between items-center">
+        <div class="text-2xl font-bold text-indigo-600 tracking-tighter">GrabGo</div>
         
-        <button onclick="startLogin()" class="w-full max-w-xs bg-black text-white py-4 rounded-xl flex items-center justify-center gap-3 active:scale-95 transition-all font-bold shadow-2xl">
-            <img src="https://www.google.com/favicon.ico" class="w-4 h-4" alt="G"/>
-            <span class="text-sm tracking-tight">Sign in with Google</span>
-        </button>
+        <div id="user-greeting" class="hidden font-semibold text-slate-700">
+            Kumno, <span id="user-name" class="text-indigo-600">User</span>!
+        </div>
 
-        <button onclick="adminCheck()" class="mt-8 text-[11px] font-bold text-gray-300 uppercase tracking-widest hover:text-gray-900">
-            Admin Portal & bull; Track Orders
-        </button>
-    </div>
-
-    <div id="view-dashboard" class="hidden min-h-screen bg-white">
-        <nav class="bg-white/90 backdrop-blur-md border-b border-gray-100 px-6 py-4 sticky top-0 z-50">
-            <div class="max-w-xl mx-auto flex justify-between items-center">
-                <div class="flex items-center gap-2">
-                    <img src="FinalLogo.png" alt="GrabGo" class="h-8 w-auto">
-                    <span class="text-xl font-900 tracking-tighter italic">GRABGO</span>
-                </div>
-                <div class="w-9 h-9 rounded-full bg-gray-100 border border-gray-200 overflow-hidden">
-                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="User">
-                </div>
+        <div class="flex items-center gap-4">
+            <div id="g_id_onload"
+                 data-client_id="YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com"
+                 data-callback="handleCredentialResponse">
             </div>
-        </nav>
-
-        <main class="max-w-xl mx-auto px-6 py-10">
-            <h2 class="text-3xl font-900 text-gray-900 mb-8 tracking-tighter">Select Service</h2>
-            <div class="grid grid-cols-2 gap-4 mb-10">
-                <div onclick="showOrder('Medicines')" class="service-card cursor-pointer">
-                    <span class="material-icons-outlined g-icon">medical_services</span>
-                    <h3 class="font-700 text-sm">Medicines</h3>
-                    <p class="text-[10px] font-sleek text-gray-500 mt-1">Specially for Elderly</p>
-                </div>
-                <div onclick="showOrder('Household')" class="service-card cursor-pointer">
-                    <span class="material-icons-outlined g-icon">inventory_2</span>
-                    <h3 class="font-700 text-sm">Household</h3>
-                    <p class="text-[10px] font-sleek text-gray-500 mt-1">Below 1 Kg</p>
-                </div>
-                <div onclick="showOrder('Documents')" class="service-card cursor-pointer">
-                    <span class="material-icons-outlined g-icon">assignment</span>
-                    <h3 class="font-700 text-sm">Documents</h3>
-                    <p class="text-[10px] font-sleek text-gray-500 mt-1">Private/Public Offices</p>
-                </div>
-                <div onclick="showOrder('Scooty Taxi')" class="service-card cursor-pointer">
-                    <span class="material-icons-outlined g-icon">moped</span>
-                    <h3 class="font-700 text-sm">Scooty Taxi</h3>
-                    <p class="text-[10px] font-sleek text-gray-500 mt-1">Only Passenger</p>
-                </div>
-            </div>
-
-            <div class="bg-black p-10 rounded-3xl text-white text-center shadow-2xl relative overflow-hidden">
-                <h3 class="text-2xl font-900 italic mb-2 tracking-tighter">GrabGo Prime</h3>
-                <p class="text-sm font-sleek text-gray-300 mb-8">Subscribe for <span class="text-white font-700">Flat Rs. 80 across Shillong.</span></p>
-                <div class="flex justify-center gap-10 pt-6 border-t border-white/10">
-                    <span class="material-icons-outlined text-gray-500">verified</span>
-                    <span class="material-icons-outlined text-gray-500">bolt</span>
-                    <span class="material-icons-outlined text-gray-500">support_agent</span>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <div id="view-order" class="hidden max-w-xl mx-auto p-6">
-        <button onclick="showDashboard()" class="mb-8 font-bold text-gray-400 text-[11px] uppercase flex items-center gap-2">
-            <span class="material-icons-outlined text-sm">arrow_back</span> Back
-        </button>
-        <div class="bg-white border border-gray-100 rounded-3xl p-8 shadow-2xl">
-            <div class="flex justify-between items-end mb-6">
-                <div>
-                    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Selected Service</p>
-                    <h3 id="order-title" class="text-2xl font-900 tracking-tighter uppercase">Service</h3>
-                </div>
-                <span id="display-price" class="text-2xl font-900 text-gray-900">₹100</span>
-            </div>
-
-            <div class="flex bg-gray-100 p-1 rounded-xl mb-6">
-                <button id="btn-normal" onclick="setPrice(100, 'Normal')" class="toggle-btn active-toggle">NORMAL (₹100)</button>
-                <button id="btn-urgent" onclick="setPrice(180, 'Urgent')" class="toggle-btn inactive-toggle">URGENT (₹180)</button>
-            </div>
+            <div class="g_id_signin" data-type="standard"></div>
             
-            <form onsubmit="handleFormSubmit(event)" class="space-y-4">
-                <input type="tel" required placeholder="Phone Number" class="w-full p-4 bg-gray-50 rounded-xl outline-none text-sm border border-transparent focus:border-yellow-500 focus:bg-white">
-                <input type="text" id="pickup-input" required placeholder="Pickup Address" class="w-full p-4 bg-gray-50 rounded-xl outline-none text-sm border border-transparent focus:border-yellow-500 focus:bg-white">
-                <input type="text" id="delivery-input" required placeholder="Delivery Address" class="w-full p-4 bg-gray-50 rounded-xl outline-none text-sm border border-transparent focus:border-yellow-500 focus:bg-white">
-                
-                <div class="grid grid-cols-2 gap-3 mt-6">
-                    <button type="button" onclick="payWithUPI()" class="border-2 border-black p-4 rounded-xl font-900 text-[10px] uppercase flex items-center justify-center gap-2">
-                        <span class="material-icons-outlined text-sm">account_balance_wallet</span> PAY UPI
-                    </button>
-                    <button type="submit" class="yellow-brand p-4 rounded-xl font-900 text-[10px] uppercase shadow-lg">
-                        CASH ON DELIVERY
-                    </button>
+            <button id="logoutBtn" onclick="logout()" class="hidden text-sm font-medium text-red-500 underline">Logout</button>
+        </div>
+    </nav>
+
+    <main id="customer-view" class="pt-10 px-6">
+        <header class="max-w-4xl mx-auto text-center mb-16">
+            <h1 class="text-5xl font-extrabold mb-4">Fast Delivery, <span class="text-indigo-600">Sleek Experience.</span></h1>
+            <p class="text-slate-500">Your functional app is now a premium service.</p>
+        </header>
+
+        <section class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="p-8 rounded-[2.5rem] bg-blue-50 border border-blue-100 hover:shadow-xl transition-all">
+                <div class="text-3xl mb-4">🚚</div>
+                <h3 class="text-xl font-bold text-blue-900">Instant Delivery</h3>
+                <p class="text-blue-700/60 mt-2">Essentials in 20 minutes.</p>
+            </div>
+            <div class="p-8 rounded-[2.5rem] bg-emerald-50 border border-emerald-100 hover:shadow-xl transition-all">
+                <div class="text-3xl mb-4">📦</div>
+                <h3 class="text-xl font-bold text-emerald-900">Self Pick-up</h3>
+                <p class="text-emerald-700/60 mt-2">Skip the queue.</p>
+            </div>
+            <div class="p-8 rounded-[2.5rem] bg-purple-50 border border-purple-100 hover:shadow-xl transition-all">
+                <div class="text-3xl mb-4">💎</div>
+                <h3 class="text-xl font-bold text-purple-900">GrabGo Prime</h3>
+                <p class="text-purple-700/60 mt-2">Zero fees for you.</p>
+            </div>
+        </section>
+    </main>
+
+    <div id="admin-dashboard" class="hidden min-h-screen bg-slate-50 p-8">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-3xl font-bold">Admin Dashboard</h2>
+                <span class="bg-indigo-100 text-indigo-700 px-4 py-1 rounded-full text-sm font-bold">Verified Admin</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
+                    <p class="text-slate-500 text-sm">Total Orders</p>
+                    <h4 class="text-3xl font-bold">1,284</h4>
                 </div>
-            </form>
-            <p class="text-center text-[9px] text-gray-400 mt-4 uppercase font-bold tracking-widest">UPI ID: exeemsales@oksbi</p>
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
+                    <p class="text-slate-500 text-sm">Revenue</p>
+                    <h4 class="text-3xl font-bold">₹42,500</h4>
+                </div>
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
+                    <p class="text-slate-500 text-sm">Active Riders</p>
+                    <h4 class="text-3xl font-bold">18</h4>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
+                <div class="p-6 border-b border-slate-50 font-bold">Recent Orders</div>
+                <table class="w-full text-left border-collapse">
+                    <thead class="bg-slate-50 text-slate-500 text-sm">
+                        <tr>
+                            <th class="p-4">Customer Gmail</th>
+                            <th class="p-4">Item</th>
+                            <th class="p-4">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="order-rows">
+                        </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
     <script>
-        let currentPrice = 100;
-        let isAdmin = false;
+        const ADMIN_EMAIL = "your-gmail@gmail.com"; // <-- PUT YOUR ADMIN EMAIL HERE
 
-        function startLogin() {
-            // Admin Check: Simulating detection of your Gmail
-            const loggedInEmail = "exeemsales@gmail.com"; 
-            if(loggedInEmail === "exeemsales@gmail.com") isAdmin = true;
-            
-            setTimeout(() => {
-                hideAll();
-                document.getElementById('view-dashboard').classList.remove('hidden');
-            }, 500);
+        function decodeJwtResponse(token) {
+            let base64Url = token.split(".")[1];
+            let base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+            return JSON.parse(atob(base64));
         }
 
-        function adminCheck() {
-            if(isAdmin) {
-                alert("Admin Identity Verified (Gmail: exeemsales). Accessing Portal...");
-                // You can point this to your admin URL or view later
-            } else {
-                alert("Please sign in with your authorized Gmail first.");
+        function handleCredentialResponse(response) {
+            const userData = decodeJwtResponse(response.credential);
+            
+            // Show Greeting
+            document.getElementById('user-name').innerText = userData.given_name;
+            document.getElementById('user-greeting').classList.remove('hidden');
+            document.querySelector('.g_id_signin').classList.add('hidden');
+            document.getElementById('logoutBtn').classList.remove('hidden');
+
+            // Check if Admin
+            if (userData.email === ADMIN_EMAIL) {
+                showAdminDashboard();
             }
         }
 
-        function showOrder(name) {
-            hideAll();
-            document.getElementById('view-order').classList.remove('hidden');
-            document.getElementById('order-title').innerText = name;
+        function showAdminDashboard() {
+            document.getElementById('customer-view').classList.add('hidden');
+            document.getElementById('admin-dashboard').classList.remove('hidden');
             
-            const pick = document.getElementById('pickup-input');
-            const deli = document.getElementById('delivery-input');
-
-            // Dynamic Placeholder logic for Scooty Taxi
-            if(name === 'Scooty Taxi') {
-                pick.placeholder = "Where are you Now ?";
-                deli.placeholder = "Dropping Address";
-            } else {
-                pick.placeholder = "Pickup Address";
-                deli.placeholder = "Delivery Address";
-            }
-            setPrice(100, 'Normal'); 
+            // Sample Data injection
+            const rows = [
+                { email: "user1@gmail.com", item: "Burger Meal", status: "Pending" },
+                { email: "user2@gmail.com", item: "Grocery Pack", status: "Delivered" }
+            ];
+            
+            const tableBody = document.getElementById('order-rows');
+            tableBody.innerHTML = rows.map(order => `
+                <tr class="border-b border-slate-50 hover:bg-slate-50 transition-colors">
+                    <td class="p-4">${order.email}</td>
+                    <td class="p-4 font-medium">${order.item}</td>
+                    <td class="p-4">
+                        <span class="px-3 py-1 ${order.status === 'Pending' ? 'bg-orange-100 text-orange-600' : 'bg-green-100 text-green-600'} rounded-full text-xs font-bold">
+                            ${order.status}
+                        </span>
+                    </td>
+                </tr>
+            `).join('');
         }
 
-        function setPrice(amt, type) {
-            currentPrice = amt;
-            document.getElementById('display-price').innerText = "₹" + amt;
-            document.getElementById('btn-normal').className = type === 'Normal' ? "toggle-btn active-toggle" : "toggle-btn inactive-toggle";
-            document.getElementById('btn-urgent').className = type === 'Urgent' ? "toggle-btn active-toggle" : "toggle-btn inactive-toggle";
+        function logout() {
+            location.reload(); // Simple way to reset state
         }
-
-        function payWithUPI() {
-            const upiUrl = `upi://pay?pa=exeemsales@oksbi&pn=GrabGo&am=${currentPrice}&cu=INR`;
-            window.location.href = upiUrl;
-            alert(`Redirecting to UPI apps to pay ₹${currentPrice} to exeemsales@oksbi`);
-        }
-
-        function hideAll() {
-            document.querySelectorAll('body > div').forEach(d => d.classList.add('hidden'));
-            window.scrollTo(0,0);
-        }
-
-        function showDashboard() { hideAll(); document.getElementById('view-dashboard').classList.remove('hidden'); }
-        function handleFormSubmit(e) { e.preventDefault(); alert("Order Confirmed! Your GrabGo rider is coming."); location.reload(); }
     </script>
 </body>
 </html>
