@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>GrabGo | Logistics & Delivery</title>
+    <title>GrabGo | Professional Logistics</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
@@ -12,28 +12,26 @@
         .yellow-brand { background-color: #F2CA52; }
         .hidden { display: none !important; }
         
-        /* SLEEK TYPOGRAPHY */
         .font-900 { font-weight: 900; }
         .font-sleek { font-weight: 300; }
 
-        /* SERVICE CARDS - 70% Opacity with Centered Content */
+        /* SERVICE CARDS - 70% Opacity */
         .service-card { 
             background-color: rgba(243, 244, 246, 0.7); 
             border: 1px solid rgba(229, 231, 235, 0.5);
-            border-radius: 16px;
+            border-radius: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 2.5rem 1rem;
+            padding: 2rem 1rem;
             transition: all 0.3s ease;
         }
-        .service-card:hover { background-color: rgba(242, 202, 82, 0.1); border-color: #F2CA52; }
+        .service-card:hover { background-color: white; border-color: #F2CA52; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
         
-        .g-icon { font-size: 36px !important; color: #111827; margin-bottom: 12px; }
+        .g-icon { font-size: 40px !important; color: #111827; margin-bottom: 14px; }
 
-        /* LOGO BOX */
         .logo-container { width: 180px; height: 180px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; }
         .logo-container img { width: 100%; height: 100%; object-fit: contain; }
     </style>
@@ -52,7 +50,7 @@
             <span class="text-sm tracking-tight">Sign in with Google</span>
         </button>
 
-        <button onclick="adminLogin()" class="mt-8 text-[11px] font-bold text-gray-300 uppercase tracking-widest hover:text-gray-900 transition-colors">
+        <button onclick="adminLogin()" class="mt-8 text-[11px] font-bold text-gray-300 uppercase tracking-widest hover:text-gray-900">
             Admin Portal &bull; Track Orders
         </button>
     </div>
@@ -77,22 +75,22 @@
                 <div onclick="showOrder('Medicines')" class="service-card cursor-pointer">
                     <span class="material-icons-outlined g-icon">medical_services</span>
                     <h3 class="font-700 text-sm">Medicines</h3>
-                    <p class="text-[9px] font-bold text-gray-400 uppercase mt-1">Instant</p>
+                    <p class="text-[10px] font-sleek text-gray-500 mt-1 leading-tight">Specially for Elderly</p>
                 </div>
                 <div onclick="showOrder('Household')" class="service-card cursor-pointer">
                     <span class="material-icons-outlined g-icon">inventory_2</span>
                     <h3 class="font-700 text-sm">Household</h3>
-                    <p class="text-[9px] font-bold text-gray-400 uppercase mt-1">Delivery</p>
+                    <p class="text-[10px] font-sleek text-gray-500 mt-1 leading-tight">Below 1 Kg</p>
                 </div>
                 <div onclick="showOrder('Documents')" class="service-card cursor-pointer">
                     <span class="material-icons-outlined g-icon">assignment</span>
                     <h3 class="font-700 text-sm">Documents</h3>
-                    <p class="text-[9px] font-bold text-gray-400 uppercase mt-1">Secure</p>
+                    <p class="text-[10px] font-sleek text-gray-500 mt-1 leading-tight">Private/Public Offices</p>
                 </div>
                 <div onclick="showOrder('Scooty Taxi')" class="service-card cursor-pointer">
                     <span class="material-icons-outlined g-icon">moped</span>
                     <h3 class="font-700 text-sm">Scooty Taxi</h3>
-                    <p class="text-[9px] font-bold text-gray-400 uppercase mt-1">Ride</p>
+                    <p class="text-[10px] font-sleek text-gray-500 mt-1 leading-tight">Only Passenger</p>
                 </div>
             </div>
 
@@ -102,7 +100,6 @@
                     Subscribe to our service for <br>
                     <span class="text-white font-700">Flat Rs. 80 across Shillong.</span>
                 </p>
-                
                 <div class="flex justify-center gap-10 pt-6 border-t border-white/10">
                     <span class="material-icons-outlined text-gray-500">verified</span>
                     <span class="material-icons-outlined text-gray-500">bolt</span>
@@ -114,7 +111,7 @@
 
     <div id="view-order" class="hidden max-w-xl mx-auto p-6">
         <button onclick="showDashboard()" class="mb-8 font-bold text-gray-400 text-[11px] uppercase tracking-widest flex items-center gap-2">
-            <span class="material-icons-outlined text-sm">arrow_back</span> Back to Services
+            <span class="material-icons-outlined text-sm">arrow_back</span> Back
         </button>
         <div class="bg-white border border-gray-100 rounded-3xl p-8 shadow-2xl">
             <div class="flex justify-between items-end mb-8">
@@ -124,21 +121,26 @@
                 </div>
                 <span id="display-price" class="text-2xl font-900 text-gray-900">₹100</span>
             </div>
+            
             <form onsubmit="handleFormSubmit(event)" class="space-y-4">
                 <input type="tel" required placeholder="Phone Number" class="w-full p-4 bg-gray-50 rounded-xl outline-none border border-transparent focus:border-yellow-500 focus:bg-white transition-all text-sm">
-                <input type="text" required placeholder="What are we picking up?" class="w-full p-4 bg-gray-50 rounded-xl outline-none border border-transparent focus:border-yellow-500 focus:bg-white transition-all text-sm">
                 <input type="text" required placeholder="Pickup Address" class="w-full p-4 bg-gray-50 rounded-xl outline-none border border-transparent focus:border-yellow-500 focus:bg-white transition-all text-sm">
                 <input type="text" required placeholder="Delivery Address" class="w-full p-4 bg-gray-50 rounded-xl outline-none border border-transparent focus:border-yellow-500 focus:bg-white transition-all text-sm">
                 
+                <div class="p-4 bg-red-50 border border-red-100 rounded-xl mt-4">
+                    <p class="text-[10px] text-red-600 font-bold uppercase tracking-tight text-center">
+                        Note: UPI Payment is currently disabled. Please use Cash on Delivery.
+                    </p>
+                </div>
+
                 <button type="submit" class="yellow-brand w-full py-5 rounded-xl font-900 text-sm uppercase shadow-lg active:scale-95 transition-all mt-4">
-                    Continue to Payment
+                    Confirm Order (COD)
                 </button>
             </form>
         </div>
     </div>
 
     <script>
-        // NAVIGATION LOGIC
         function hideAll() {
             document.getElementById('view-home').classList.add('hidden');
             document.getElementById('view-dashboard').classList.add('hidden');
@@ -147,7 +149,6 @@
         }
 
         function startLogin() {
-            // Simulated login delay
             setTimeout(() => {
                 hideAll();
                 document.getElementById('view-dashboard').classList.remove('hidden');
@@ -156,11 +157,8 @@
 
         function adminLogin() {
             const pass = prompt("Enter Admin Password:");
-            if(pass === "1234") {
-                alert("Welcome Admin. Order tracking initialized.");
-            } else {
-                alert("Access Denied.");
-            }
+            if(pass === "1234") alert("Welcome Admin. Tracking online.");
+            else alert("Access Denied.");
         }
 
         function showDashboard() {
@@ -176,7 +174,7 @@
 
         function handleFormSubmit(e) {
             e.preventDefault();
-            alert("Order Confirmed. Connecting to a GrabGo rider in Shillong...");
+            alert("Order Confirmed via Cash on Delivery. A GrabGo rider will contact you shortly.");
             location.reload();
         }
     </script>
