@@ -3,117 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>GrabGo | Professional Logistics</title>
+    <title>GrabGo | Shillong</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; background: #ffffff; color: #111827; }
         .hidden { display: none !important; }
-        
-        /* Service Cards: Distinct but Professional */
-        .card { border-radius: 28px; padding: 30px 15px; text-align: center; transition: all 0.2s ease; cursor: pointer; border: 1px solid rgba(0,0,0,0.03); }
+        .card { border-radius: 24px; padding: 25px 15px; text-align: center; transition: all 0.2s; cursor: pointer; }
         .card:active { transform: scale(0.95); }
         
-        .c-blue { background-color: #f0f7ff; color: #1d4ed8; }
-        .c-green { background-color: #f0fdf4; color: #15803d; }
-        .c-purple { background-color: #faf5ff; color: #7e22ce; }
-        .c-orange { background-color: #fffaf5; color: #c2410c; }
-        
-        .g-icon { font-size: 40px !important; margin-bottom: 12px; }
+        /* The Distinct Colors You Wanted */
+        .c-meds { background: #f0f7ff; color: #1d4ed8; border: 1px solid #dbeafe; }
+        .c-house { background: #f0fdf4; color: #15803d; border: 1px solid #dcfce7; }
+        .c-docs { background: #faf5ff; color: #7e22ce; border: 1px solid #f3e8ff; }
+        .c-taxi { background: #fffaf5; color: #c2410c; border: 1px solid #ffedd5; }
     </style>
 </head>
-<body class="antialiased">
+<body>
 
-    <div id="view-login" class="flex flex-col items-center justify-center min-h-screen p-8 text-center">
-        <h1 class="text-4xl font-800 italic tracking-tighter mb-1">GRABGO</h1>
-        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.4em] mb-12">Shillong Logistics</p>
+    <div id="view-login" class="flex flex-col items-center justify-center min-h-screen px-10 text-center">
+        <h1 class="text-4xl font-800 italic tracking-tighter mb-2">GRABGO</h1>
+        <p class="text-[10px] font-bold text-gray-300 uppercase tracking-[0.4em] mb-12 text-indigo-600">Shillong</p>
         
-        <div class="w-full max-w-xs space-y-3">
-            <input type="email" id="email-input" placeholder="Enter Gmail ID" class="w-full p-4 bg-gray-50 rounded-2xl outline-none focus:border-black border border-transparent text-sm text-center">
-            <button onclick="handleSimpleLogin()" class="w-full bg-black text-white py-4 rounded-2xl font-bold shadow-2xl active:scale-95 transition-all">
-                Continue to Dashboard
-            </button>
-        </div>
+        <input type="email" id="email" placeholder="Enter Gmail ID" class="w-full max-w-xs p-4 bg-gray-50 rounded-2xl mb-4 outline-none border border-transparent focus:border-black text-center text-sm">
+        <button onclick="handleLogin()" class="w-full max-w-xs bg-black text-white py-4 rounded-2xl font-bold shadow-xl active:scale-95 transition-transform">
+            Continue to App
+        </button>
     </div>
 
     <div id="view-dash" class="hidden min-h-screen">
-        <nav class="p-6 flex justify-between items-center sticky top-0 bg-white/80 backdrop-blur-md z-10">
+        <nav class="p-6 flex justify-between items-center sticky top-0 bg-white/90 backdrop-blur-md z-10 border-b border-gray-50">
             <div>
                 <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Kumno!</p>
                 <h2 id="user-display" class="text-xl font-800 italic tracking-tighter uppercase">User</h2>
             </div>
-            <button id="admin-orders-btn" onclick="showOrders()" class="hidden bg-indigo-600 text-white text-[10px] px-5 py-2.5 rounded-full font-bold shadow-lg shadow-indigo-100">
+            <button id="orders-btn" onclick="showOrders()" class="hidden bg-indigo-600 text-white text-[10px] px-5 py-2.5 rounded-full font-bold shadow-lg">
                 ORDERS
             </button>
         </nav>
 
-        <main class="max-w-xl mx-auto px-6 pb-12">
-            <h3 class="text-lg font-800 tracking-tighter mb-6">Our Services</h3>
+        <main class="px-6 pb-12 max-w-xl mx-auto">
+            <h3 class="text-lg font-800 tracking-tighter mb-6 mt-6">Select Service</h3>
+            
             <div class="grid grid-cols-2 gap-4">
-                <div class="card c-blue">
-                    <span class="material-icons-outlined g-icon">medical_services</span>
-                    <p class="font-bold text-sm">Medicines</p>
+                <div class="card c-meds">
+                    <span class="material-icons-outlined text-4xl mb-2">medical_services</span>
+                    <p class="font-bold text-sm uppercase">Medicines</p>
                 </div>
-                <div class="card c-green">
-                    <span class="material-icons-outlined g-icon">inventory_2</span>
-                    <p class="font-bold text-sm">Household</p>
+                <div class="card c-house">
+                    <span class="material-icons-outlined text-4xl mb-2">inventory_2</span>
+                    <p class="font-bold text-sm uppercase">Household</p>
                 </div>
-                <div class="card c-purple">
-                    <span class="material-icons-outlined g-icon">assignment</span>
-                    <p class="font-bold text-sm">Documents</p>
+                <div class="card c-docs">
+                    <span class="material-icons-outlined text-4xl mb-2">assignment</span>
+                    <p class="font-bold text-sm uppercase">Documents</p>
                 </div>
-                <div class="card c-orange">
-                    <span class="material-icons-outlined g-icon">moped</span>
-                    <p class="font-bold text-sm">Scooty Taxi</p>
+                <div class="card c-taxi">
+                    <span class="material-icons-outlined text-4xl mb-2">moped</span>
+                    <p class="font-bold text-sm uppercase">Scooty Taxi</p>
                 </div>
             </div>
 
-            <div class="mt-8 bg-gray-900 p-8 rounded-[32px] text-white">
-                <h4 class="text-lg font-800 italic mb-1">GrabGo Prime</h4>
-                <p class="text-xs text-gray-400 font-medium">Flat ₹80 delivery across Shillong</p>
+            <div class="mt-10 bg-black p-8 rounded-[32px] text-white flex justify-between items-center">
+                <div>
+                    <h4 class="text-lg font-800 italic mb-1">GrabGo Prime</h4>
+                    <p class="text-xs text-gray-400">Flat ₹80 across Shillong</p>
+                </div>
+                <span class="material-icons-outlined text-yellow-400">verified</span>
             </div>
         </main>
     </div>
 
     <div id="view-orders" class="hidden min-h-screen bg-gray-50 p-6">
-        <button onclick="hideOrders()" class="mb-6 text-gray-400"><span class="material-icons-outlined">arrow_back</span></button>
-        <h2 class="text-3xl font-800 tracking-tighter mb-8 italic">Order Requests</h2>
+        <button onclick="hideOrders()" class="mb-6 text-gray-400 flex items-center gap-2 font-bold text-[10px] uppercase">
+            <span class="material-icons-outlined text-sm">arrow_back</span> Back
+        </button>
+        <h2 class="text-3xl font-800 tracking-tighter mb-8 italic">Active Requests</h2>
         
         <div class="space-y-4">
             <div class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm">
-                <div class="flex justify-between items-start mb-2">
-                    <p class="font-bold text-sm">Medicine Pickup - Laitumkhrah</p>
-                    <span class="text-[9px] bg-yellow-100 text-yellow-600 px-2 py-1 rounded font-black uppercase">Pending</span>
+                <div class="flex justify-between items-start mb-1">
+                    <p class="font-bold text-sm">Document Pickup - Laban</p>
+                    <span class="text-[9px] bg-orange-100 text-orange-600 px-2 py-1 rounded font-black uppercase">Pending</span>
                 </div>
-                <p class="text-[11px] text-gray-400 italic">User: customer@gmail.com</p>
+                <p class="text-[10px] text-gray-400 font-bold italic">User: customer@example.com</p>
             </div>
         </div>
     </div>
 
     <script>
-        const ADMIN_EMAIL = "biswajit.mgla@gmail.com";
+        // THE SPECIFIC ADMIN EMAIL
+        const ADMIN_ID = "biswajit.mgla@gmail.com";
 
-        function handleSimpleLogin() {
-            const email = document.getElementById('email-input').value.trim().toLowerCase();
+        function handleLogin() {
+            const email = document.getElementById('email').value.trim().toLowerCase();
             
-            if(!email.includes('@')) {
-                alert("Please enter your Gmail ID to continue.");
+            if (!email.includes('@')) {
+                alert("Please enter a valid Gmail to continue.");
                 return;
             }
 
-            // UI Transitions
+            // UI Switch
             document.getElementById('view-login').classList.add('hidden');
             document.getElementById('view-dash').classList.remove('hidden');
 
-            // Set greeting name
-            const userName = email.split('@')[0].toUpperCase();
-            document.getElementById('user-display').innerText = (email === ADMIN_EMAIL) ? "BISWAJIT" : userName;
+            // Kumno! Greeting logic
+            const name = email.split('@')[0];
+            document.getElementById('user-display').innerText = (email === ADMIN_ID) ? "BISWAJIT" : name;
 
-            // THE ADMIN MAGIC: Check if email matches
-            if (email === ADMIN_EMAIL) {
-                document.getElementById('admin-orders-btn').classList.remove('hidden');
-                console.log("Admin Access Granted");
+            // Unlock Orders Button only if email matches your ID
+            if (email === ADMIN_ID) {
+                document.getElementById('orders-btn').classList.remove('hidden');
             }
         }
 
